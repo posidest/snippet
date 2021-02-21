@@ -30,7 +30,7 @@ function ProfileButton({ user }) {
 
     return (
         <>
-            <button onClick={openMenu}>
+            <button onClick={openMenu} className='icon'>
                 <i className="fas fa-cut" />
             </button>
             {showMenu && (
