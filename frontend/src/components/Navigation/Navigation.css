@@ -4,39 +4,45 @@ i {
     position: fixed;
     top: 20px;
     left: 20px;
-    height: 30px;
 }
 
 .nav {
+    box-sizing: border-box;
     display: flex;
     position: fixed;
-    width: 100%;
     justify-content: space-between;
-    background-color: rgba(150, 150, 150, 0.3);
+    border-radius: 5px;
+    background: rgba(210, 210, 210, 0.3);
     top: 8px;
 }
 
 .session {
     align-self: flex-end;
-    display: inline;
+    position:
 }
 
 .session a {
     text-decoration: none;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
 }
 
-.login-btn > a {
-    left: 50px;
+.session div {
+    padding: 5px 10px 5px 10px;
+    position: absolute;
+    bottom: 6px;
+    border-radius: 5px;
 }
 
 .login-btn {
     background-color:#9a8c98;
-    width: fit-content;
+    right: 85px;
 }
 
 .signup-btn {
     background-color: #f2e9e4;
-    width: fit-content;
+    right: 15px;
 }
 
 
@@ -49,7 +55,8 @@ i {
 
 @media screen and (min-width: 769px) {
     .nav {
-        width: 100%;
+        width: 99%;
         height: 40px;
+        align-self: center;
     }
 }

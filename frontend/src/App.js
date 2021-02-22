@@ -5,7 +5,9 @@ import LoginFormPage from './components/LoginFormPage';
 import SignupFormPage from './components/SignupFormPage';
 import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
-import LandingPage from './components/LandingPage'
+import LandingPage from './components/LandingPage';
+// import Feed from './components/Feed';
+
 const App = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);

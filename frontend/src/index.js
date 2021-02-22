@@ -8,8 +8,8 @@ import App from './App';
 import configureStore from './store';
 import { restoreCSRF, csrfFetch } from './store/csrf';
 import * as sessionActions from './store/session'
-const store = configureStore();
 
+const store = configureStore();
 
 
 if (process.env.NODE_ENV !== 'production') {
@@ -19,9 +19,8 @@ if (process.env.NODE_ENV !== 'production') {
   window.sessionActions = sessionActions;
 }
 
-
-
-
+//wrapping the app in the provider and passing the store in as props
+//allows the react app to access the store
 const Root = () => {
   return (
     <Provider store={store}>
@@ -31,8 +30,6 @@ const Root = () => {
     </Provider>
   );
 }
-
-
 
 
 ReactDOM.render(

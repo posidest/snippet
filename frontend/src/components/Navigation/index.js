@@ -29,7 +29,7 @@ const Navigation = ({ isLoaded }) => {
     return (
         <div className='nav'>
             <div>
-                <NavLink exact to='/'><i className="fas fa-cut" /></NavLink>
+                <NavLink exact to='/'><i className="fas fa-cut fa-lg" /></NavLink>
             </div>
             {isLoaded && sessionLinks}
         </div>

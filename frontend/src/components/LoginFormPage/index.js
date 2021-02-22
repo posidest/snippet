@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import './LoginForm.css';
+import './LoginForm.css';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -31,20 +31,20 @@ const LoginFormPage = () => {
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
             <input
-                type="text"
+                type='text'
                 value={credential}
                 onChange={(e) => setCredential(e.target.value)}
                 placeholder='Username or Email'
                 required
             />
             <input
-                type="password"
+                type='password'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder='Password'
                 required
             />
-            <button type="submit">Log In</button>
+            <button type='submit'>Log In</button>
         </form>
     );
 }
