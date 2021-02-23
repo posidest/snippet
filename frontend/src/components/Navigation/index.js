@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import PostButton from './PostButton';
 import './Navigation.css'
 
 
@@ -11,7 +12,10 @@ const Navigation = ({ isLoaded }) => {
     let sessionLinks;
     if (sessionUser) {
         sessionLinks = (
-            <ProfileButton user={sessionUser} />
+            <div>
+                <ProfileButton user={sessionUser} />
+                <PostButton />
+            </div>
         );
     } else {
         sessionLinks = (

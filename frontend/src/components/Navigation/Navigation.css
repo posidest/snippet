@@ -1,10 +1,23 @@
-
-i {
+/* i {
     color: white;
     position: fixed;
     top: 20px;
     left: 20px;
+} */
+
+
+.fa-cut {
+        color: white;
+    position: fixed;
+    top: 20px;
+    left: 20px;
 }
+
+.fa-palette {
+    /* position:fixed; */
+    align-self: flex-end;
+}
+
 
 .nav {
     box-sizing: border-box;
@@ -18,7 +31,6 @@ i {
 
 .session {
     align-self: flex-end;
-    position:
 }
 
 .session a {

@@ -6,6 +6,7 @@ import SignupFormPage from './components/SignupFormPage';
 import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
 import LandingPage from './components/LandingPage';
+import PostForm from './components/PostForm';
 // import Feed from './components/Feed';
 
 const App = () => {
@@ -28,6 +29,9 @@ const App = () => {
           </Route>
           <Route path='/signup'>
             <SignupFormPage />
+          </Route>
+          <Route path='/new'>
+            <PostForm />
           </Route>
         </Switch>
       )}
