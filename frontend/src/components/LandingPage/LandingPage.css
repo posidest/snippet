@@ -6,6 +6,7 @@
     display: flex;
     flex-direction: column;
     background-color: rgba(150, 150, 150, 0.3);
+    justify-content: center;
  }
 
 
@@ -99,10 +100,20 @@
 
 
 .text {
-    max-width: 70%;
-    margin: 100px 200px 200px 200px;
+    max-width: 500px;
+    margin-top: 100px;
 }
 
+
+.landing-pics {
+    display: flex;
+    flex-direction: row;
+}
+
+.landing-pics img {
+    max-width: 200px;
+    padding: 50px;
+}
 
 
 @media screen and (max-width: 769px) {

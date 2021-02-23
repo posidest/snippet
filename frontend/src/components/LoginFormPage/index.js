@@ -12,7 +12,7 @@ const LoginFormPage = () => {
     const [errors, setErrors] = useState([]);
 
     if (sessionUser) return (
-        <Redirect to='/' />
+        <Redirect to='/dashboard' />
     );
 
     const handleSubmit = (e) => {
@@ -24,6 +24,11 @@ const LoginFormPage = () => {
                 if (data && data.errors) setErrors(data.errors);
             });
     }
+
+    const handleDemoSubmit = () => {
+        return dispatch(sessionActions.login({ credentials: 'Demo-lition', password: 'password' }));
+    }
+
 
     return (
         <form onSubmit={handleSubmit}>
@@ -45,6 +50,7 @@ const LoginFormPage = () => {
                 required
             />
             <button type='submit'>Log In</button>
+            <button type='button' onClick={handleDemoSubmit}>Demo</button>
         </form>
     );
 }

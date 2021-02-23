@@ -6,8 +6,10 @@ import SignupFormPage from './components/SignupFormPage';
 import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
 import LandingPage from './components/LandingPage';
-import PostForm from './components/PostForm';
-// import Feed from './components/Feed';
+import ImageForm from './components/PostForm/ImageForm';
+import WordsForm from './components/PostForm/WordsForm';
+import LinkForm from './components/PostForm/LinkForm'
+import Dashboard from './components/Dashboard';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -30,8 +32,17 @@ const App = () => {
           <Route path='/signup'>
             <SignupFormPage />
           </Route>
-          <Route path='/new'>
-            <PostForm />
+          <Route path='/dashboard'>
+            <Dashboard />
+          </Route>
+          <Route path='/new/image'>
+            <ImageForm />
+          </Route>
+          <Route path='/new/words'>
+            <WordsForm />
+          </Route>
+          <Route path='/new/link'>
+            <LinkForm />
           </Route>
         </Switch>
       )}

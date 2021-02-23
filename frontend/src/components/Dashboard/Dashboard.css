@@ -1,0 +1,69 @@
+.dash {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.center {
+    position: relative;
+    width: 700px;
+}
+
+.avatar {
+   border-radius: 4px;
+    width: 55px;
+    height: 55px;
+    position: absolute;
+    right: 700px;
+    top: 20px;
+}
+
+.content-div {
+    width: 500px;
+    padding: 40px 0 20px 0;
+    background-color: white;
+    margin: 20px;
+    border-radius: 4px;
+}
+
+
+.content-div img {
+    width: 500px;
+}
+
+.content-div p {
+    color: black;
+    font-size: 12px;
+    padding: 15px;
+}
+
+.content-div i {
+    color: gray;
+}
+
+.likes {
+    position: absolute;
+    left: 30px;
+}
+
+.blog-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 165px;
+    top: 30px;
+}
+
+
+.blog-info a {
+    color: black;
+}
+
+.center a {
+  padding: 5px;
+    text-decoration: none;
+ font-size: 12px;
+color: gray;
+font-weight: bold;
+}

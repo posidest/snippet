@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 // import { useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { usePostType } from '../../context/PostContext'
+import './Navigation.css'
 
 const PostButton = () => {
     const [showMenu, setShowMenu] = useState(false);
-    const { type, setType } = usePostType()
-
+    const [type, setType] = useState('image')
+    const history = useHistory();
     const openMenu = () => {
         if (showMenu) return;
         setShowMenu(true);
@@ -33,10 +34,10 @@ const PostButton = () => {
             {showMenu && (
                 <ul className="post-dropdown">
                     <li>
-                        <NavLink to='/new/image' onClick={() => setType('image')}>Image</NavLink>
+                        <NavLink to='/new/image'>Image</NavLink>
                     </li>
-                    <li><NavLink to='/new/words' onClick={() => setType('words')}>Words</NavLink></li>
-                    <li><NavLink to='/new/link' onClick={() => setType('link')}>Link</NavLink></li>
+                    <li><NavLink to='/new/words'>Words</NavLink></li>
+                    <li><NavLink to='/new/link'>Link</NavLink></li>
                 </ul>
             )}
 

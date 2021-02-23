@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
-
+import './Navigation.css';
 function ProfileButton({ user }) {
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
@@ -31,16 +32,31 @@ function ProfileButton({ user }) {
     return (
         <>
             <button onClick={openMenu} className='icon'>
-                <i className="fas fa-cut" />
+                < i className="fas fa-user fa-lg" />
             </button>
             {showMenu && (
-                <ul className="profile-dropdown">
-                    <li>{user.username}</li>
-                    <li>{user.email}</li>
-                    <li>
+                <div className="profile-dropdown">
+                    <div className='profile-head'>
+                        <p>
+                            Account
+                        <span onClick={logout}> Log out</span>
+                        </p>
+                    </div>
+                    <ul>
+                        <li>
+                            <i className='fas fa-heart' />
+                            <NavLink to='/likes'>Likes </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to='/following'>Following</NavLink>
+                        </li>
+                        <li>{user.username}</li>
+                        <li>{user.email}</li>
+                    </ul>
+                    {/* <li>
                         <button onClick={logout}>Log Out</button>
-                    </li>
-                </ul>
+                    </li> */}
+                </div>
             )}
         </>
     );

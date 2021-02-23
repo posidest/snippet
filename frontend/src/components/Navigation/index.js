@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+// import * as sessionActions from '../../store/session';
 import ProfileButton from './ProfileButton';
 import PostButton from './PostButton';
 import './Navigation.css'
@@ -12,34 +13,40 @@ const Navigation = ({ isLoaded }) => {
     let sessionLinks;
     if (sessionUser) {
         sessionLinks = (
-            <div>
-                <ProfileButton user={sessionUser} />
-                <PostButton />
-            </div>
+            <>
+                <div>
+                    <NavLink exact to='/dashboard'><i className="fas fa-cut fa-lg" /></NavLink>
+                </div>
+                <div className='user-btns'>
+                    <ProfileButton user={sessionUser} />
+                    <PostButton />
+                </div>
+            </>
         );
     } else {
         sessionLinks = (
-            <div className='session'>
-                <div className='login-btn'>
-                    <NavLink to='/login'>Login</NavLink>
+            <>
+                <div>
+                    <NavLink exact to='/'><i className="fas fa-cut fa-lg" /></NavLink>
                 </div>
-                <div className='signup-btn'>
-                    <NavLink to='/signup'>Sign Up</NavLink>
+                <div className='session'>
+                    <div className='login-btn'>
+                        <NavLink to='/login'>Login</NavLink>
+                    </div>
+                    <div className='signup-btn'>
+                        <NavLink to='/signup'>Sign Up</NavLink>
+                    </div>
                 </div>
-            </div>
+            </>
         );
     }
 
     return (
         <div className='nav'>
-            <div>
-                <NavLink exact to='/'><i className="fas fa-cut fa-lg" /></NavLink>
-            </div>
             {isLoaded && sessionLinks}
         </div>
     );
 }
-
 
 
 
