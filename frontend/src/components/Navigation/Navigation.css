@@ -4,18 +4,31 @@
     display: flex;
     position: fixed;
     justify-content: space-between;
+    align-items: center;
     border-radius: 5px;
-    /* background: rgba(210, 210, 210, 0.3); */
+    background: rgba(210, 210, 210, 0.3);
     top: 8px;
 }
 
 .nav i {
     color: white;
-    /* background-color: transparent; */
+    top: 10px;
+    position: absolute;
 }
 
-.user-btns {
-} 
+/* .nav button {
+    background-color: transparent;
+} */
+
+
+
+.fa-palette {
+    right: 5px;
+}
+
+.fa-user {
+    right: 20px;
+}
 
 
 .session {

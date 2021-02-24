@@ -7,6 +7,11 @@ import './Navigation.css'
 const PostButton = () => {
     const [showMenu, setShowMenu] = useState(false);
     const [type, setType] = useState('image')
+    const menuItems = [
+        { to: '/new/image', copy: 'Image' },
+        { to: '/new/words', copy: 'Words' },
+        { to: '/new/link', copy: 'Link' }
+    ];
     const history = useHistory();
     const openMenu = () => {
         if (showMenu) return;
@@ -28,16 +33,18 @@ const PostButton = () => {
 
     return (
         <>
-            <button onClick={openMenu} className='post-btn'>
+            <div onClick={openMenu} className='post-btn'>
                 <i className="fas fa-palette fa-lg" />
-            </button>
+            </div>
             {showMenu && (
                 <ul className="post-dropdown">
-                    <li>
-                        <NavLink to='/new/image'>Image</NavLink>
-                    </li>
-                    <li><NavLink to='/new/words'>Words</NavLink></li>
-                    <li><NavLink to='/new/link'>Link</NavLink></li>
+                    {menuItems.map(({ to, copy }) => (
+                        <li>
+                            <NavLink to={to}>
+                                {copy}
+                            </NavLink>
+                        </li>
+                    ))}
                 </ul>
             )}
 
