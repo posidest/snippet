@@ -31,10 +31,9 @@ const validateSignup = [
 
 router.post(
     '/',
-    singleMulterUpload('avatar'),
+    singleMulterUpload('image'),
     validateSignup,
     asyncHandler(async (req, res) => {
-        // console.log('request file: ', req.file)
         const { email, password, blogName } = req.body;
         const avatar = await singlePublicFileUpload(req.file);
 
@@ -42,7 +41,7 @@ router.post(
             avatar,
             email,
             blogName,
-            password,
+            password
         });
 
         const userBlog = await createBlog(user);

@@ -10,7 +10,6 @@ import ImageForm from './components/PostForm/ImageForm';
 import WordsForm from './components/PostForm/WordsForm';
 import LinkForm from './components/PostForm/LinkForm'
 import Dashboard from './components/Dashboard';
-import CreateUser from './components/CreateUser'
 
 const App = () => {
   const dispatch = useDispatch();
@@ -31,7 +30,7 @@ const App = () => {
             <LoginFormPage />
           </Route>
           <Route path='/signup'>
-            <CreateUser />
+            <SignupFormPage />
           </Route>
           <Route path='/dashboard'>
             <Dashboard />
@@ -45,9 +44,6 @@ const App = () => {
           <Route path='/new/link'>
             <LinkForm />
           </Route>
-          {/* <Route path='/create-user'>
-            <CreateUser />
-          </Route> */}
         </Switch>
       )}
     </>

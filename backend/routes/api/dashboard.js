@@ -5,28 +5,21 @@ const { handleValidationErrors } = require('../../utils/validation')
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User, Blog, Post } = require('../../db/models');
 const { singlePublicFileUpload, singleMulterUpload } = require('../../awsS3');
-const router = express.Router()
+const { default: PostButton } = require('../../../frontend/src/components/Navigation/PostButton');
+
 
 router.post(
-    '/image',
-    singleMulterUpload('content'),
+    '/',
+    singleMulterUpload('image'),
     asyncHandler(async (req, res) => {
-        const { type, userId, caption } = req.body;
-        const content = await singlePublicFileUpload(req.file);
-
+        const { userId, caption }
+        const imageUrl = await singlePublicFileUpload(req.file);
         const post = await Post.create({
-            type,
-            content,
+            type: 'image',
+            content: imageUrl,
             caption,
             userId
         });
-
         return res.json({ post })
     })
 )
-
-
-
-
-
-module.exports = router;

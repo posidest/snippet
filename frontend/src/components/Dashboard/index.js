@@ -21,7 +21,7 @@ const Dashboard = () => {
     const sessionUser = useSelector(state => state.session.user);
 
     if (!sessionUser) return (
-        <Redirect to='/' />
+        <Redirect to='/login' />
     );
 
     const posts = {

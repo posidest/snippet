@@ -48,22 +48,6 @@ export const restoreUser = () => async (dispatch) => {
     }
 }
 
-// export const signup = ({ blogName, email, password }) => async (dispatch) => {
-//     const response = await csrfFetch('/api/users', {
-//         method: 'POST',
-//         body: JSON.stringify({
-//             blogName,
-//             email,
-//             password,
-//         }),
-//     });
-//     const newUser = await response.json();
-//     console.log('new user: ', newUser)
-//     dispatch(setUser(newUser.user));
-//     return response;
-// };
-
-
 export const signup = ({ blogName, email, password }) => async (dispatch) => {
     const response = await csrfFetch('/api/users', {
         method: 'POST',
@@ -80,10 +64,8 @@ export const signup = ({ blogName, email, password }) => async (dispatch) => {
 };
 
 
-
-
 export const createUser = (user) => async (dispatch) => {
-    const { avatar, blogName, email, password } = user;
+    const { image, blogName, email, password } = user;
     const formData = new FormData();
     formData.append("blogName", blogName);
     formData.append("email", email);
@@ -91,9 +73,7 @@ export const createUser = (user) => async (dispatch) => {
 
 
     // for single file
-    if (avatar) formData.append("avatar", avatar);
-
-    console.log(formData.get('avatar'));
+    if (image) formData.append("image", image);
 
     const res = await csrfFetch(`/api/users/`, {
         method: "POST",
@@ -102,11 +82,9 @@ export const createUser = (user) => async (dispatch) => {
         },
         body: formData,
     });
-    if (res.ok) {
-        const data = await res.json();
-        dispatch(setUser(data.user));
-        return res;
-    }
+
+    const data = await res.json();
+    dispatch(setUser(data.user));
 };
 
 
@@ -119,7 +97,7 @@ export default function sessionReducer(state = { user: null }, action) {
     switch (action.type) {
         case SET_USER:
             newState = { ...state, user: action.payload }
-            // console.log('new state:', newState)
+            console.log('new state:', newState)
             // newState.user = action.payload;
             return newState;
         case REMOVE_USER:
