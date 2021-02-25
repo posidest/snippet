@@ -25,6 +25,9 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      avatar: {
+        type: Sequelize.TEXT,
       }
     });
   },
