@@ -46,7 +46,7 @@ const LandingPage = ({ isLoaded }) => {
                 </div>
                 <div className='landing-pics'>
                     {pics.map((pic, idx) => (
-                        <div className='pic'>
+                        <div className='pic' key={pic}>
                             <img src={pic} alt={idx} />
                         </div>
                     ))}

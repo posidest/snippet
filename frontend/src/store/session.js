@@ -48,28 +48,32 @@ export const restoreUser = () => async (dispatch) => {
     }
 }
 
-export const signup = ({ username, email, password }) => async (dispatch) => {
+export const signup = ({ blogName, email, password }) => async (dispatch) => {
     const response = await csrfFetch('/api/users', {
         method: 'POST',
         body: JSON.stringify({
-            username,
+            blogName,
             email,
             password,
         }),
     });
     const newUser = await response.json();
+    console.log('new user: ', newUser)
     dispatch(setUser(newUser.user));
     return response;
 };
 
 
 
+// const initialState = {user: null};
 
 export default function sessionReducer(state = { user: null }, action) {
     let newState;
     switch (action.type) {
         case SET_USER:
-            newState = { ...state, ...action.payload }
+            newState = { ...state, user: action.payload }
+            console.log('new state:', newState)
+            // newState.user = action.payload;
             return newState;
         case REMOVE_USER:
             delete state.user;

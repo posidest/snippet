@@ -3,7 +3,8 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation')
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { User, Blog } = require('../../db/models');
+const { createBlog } = require('../../utils/blog')
 
 const router = express.Router();
 
@@ -12,14 +13,14 @@ const validateSignup = [
         .exists({ checkFalsy: true })
         .isEmail()
         .withMessage('Please provide a valid email.'),
-    check('username')
+    check('blogName')
         .exists({ checkFalsy: true })
         .isLength({ min: 4 })
-        .withMessage('Please provide a username with at least 4 characters.'),
-    check('username')
+        .withMessage('Please provide a blog name with at least 4 characters.'),
+    check('blogName')
         .not()
         .isEmail()
-        .withMessage('Username cannot be an email.'),
+        .withMessage('Blog name cannot be an email.'),
     check('password')
         .exists({ checkFalsy: true })
         .isLength({ min: 6 })
@@ -28,16 +29,21 @@ const validateSignup = [
 ];
 
 
-router.post('/', validateSignup, asyncHandler(async (req, res) => {
-    const { email, password, username } = req.body;
-    const user = await User.signup({ email, username, password });
+router.post(
+    '/',
+    validateSignup,
+    asyncHandler(async (req, res) => {
+        const { email, password, blogName } = req.body;
+        const user = await User.signup({ email, blogName, password });
+        const userBlog = await createBlog(user);
 
-    await setTokenCookie(res, user);
+        await setTokenCookie(res, user);
 
-    return res.json({
-        user,
-    });
-}),
+        return res.json({
+            user,
+            userBlog,
+        });
+    }),
 );
 
 

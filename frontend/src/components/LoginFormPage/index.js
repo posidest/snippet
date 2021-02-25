@@ -39,7 +39,7 @@ const LoginFormPage = () => {
                 type='text'
                 value={credential}
                 onChange={(e) => setCredential(e.target.value)}
-                placeholder='Username or Email'
+                placeholder='Blog Name or Email'
                 required
             />
             <input

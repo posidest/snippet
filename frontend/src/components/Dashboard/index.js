@@ -19,6 +19,11 @@ import './Dashboard.css';
 
 const Dashboard = () => {
     const sessionUser = useSelector(state => state.session.user);
+
+    if (!sessionUser) return (
+        <Redirect to='/login' />
+    );
+
     const posts = {
         1: { id: 1, body: pic1, caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
         2: { id: 2, body: pic2, caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
@@ -36,27 +41,21 @@ const Dashboard = () => {
 
     const postArray = Object.values(posts);
 
-
-    if (!sessionUser) return (
-        <Redirect to='/login' />
-    );
-
-    // let pics = [pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9, pic10, pic11, pic12]
     return (
         <div className='dash'>
             {postArray.map(post => (
-                <div className='center'>
+                <div className='center' key={post.id}>
                     <img src={avatar} alt='avatar' className='avatar' />
                     <div className='content-div'>
                         <div className='blog-info'>
                             <a href='https://meow-zah.tumblr.com/'>quixotics</a>
-                            <i class='fas fa-sync-alt fa-lg' />
+                            <i className='fas fa-sync-alt fa-lg' />
                             <a href='https://mentaltimetraveller.tumblr.com/'>mental time traveller</a>
                         </div>
                         <img src={post.body} alt='picture' className='dash-img' />
                         <p>{post.caption}</p>
                         <a href='blah.com' className='likes'>578478 likes</a>
-                        <div className='dash-btns'><i class="fas fa-heart fa-lg" />< i class="fas fa-sync-alt fa-lg" /></div>
+                        <div className='dash-btns'><i className="fas fa-heart fa-lg" />< i className="fas fa-sync-alt fa-lg" /></div>
                     </div>
                 </div>
             ))}

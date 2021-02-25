@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-// import * as sessionActions from '../../store/session';
+import * as sessionActions from '../../store/session';
 import ProfileButton from './ProfileButton';
 import PostButton from './PostButton';
 import './Navigation.css'

@@ -8,9 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
+      blogName: {
         allowNull: false,
-        type: Sequelize.STRING(30),
+        type: Sequelize.STRING(50),
         unique: true
       },
       email: {
@@ -20,7 +20,7 @@ module.exports = {
       },
       hashedPassword: {
         allowNull: false,
-        type: Sequelize.STRING.BINARY
+        type: Sequelize.STRING.BINARY(60)
       },
       createdAt: {
         allowNull: false,
