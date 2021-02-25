@@ -6,10 +6,11 @@ const { restoreUser } = require('../../utils/auth.js');
 const { requireAuth } = require('../../utils/auth.js');
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
+const postsRouter = require('./posts.js')
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
-
+router.use('/post', postsRouter)
 
 // get /api/set-token-cookie
 // router.get('/set-token-cookie', asyncHandler(async (req, res) => {
