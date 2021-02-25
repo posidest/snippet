@@ -64,6 +64,31 @@ export const signup = ({ blogName, email, password }) => async (dispatch) => {
 };
 
 
+export const createUser = (user) => async (dispatch) => {
+    const { image, blogName, email, password } = user;
+    const formData = new FormData();
+    formData.append("blogName", blogName);
+    formData.append("email", email);
+    formData.append("password", password);
+
+
+    // for single file
+    if (image) formData.append("image", image);
+
+    const res = await csrfFetch(`/api/users/`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+        body: formData,
+    });
+
+    const data = await res.json();
+    dispatch(setUser(data.user));
+};
+
+
+
 
 // const initialState = {user: null};
 

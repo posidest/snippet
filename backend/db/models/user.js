@@ -48,6 +48,20 @@ module.exports = (sequelize, DataTypes) => {
     });
   User.associate = function (models) {
     User.hasOne(models.Blog, { foreignKey: 'userId' });
+
+    const columnMappingFollows = {
+      through: 'Follows',
+      otherKey: 'blogId',
+      foreignKey: 'userId'
+    };
+    User.belongsToMany(models.Blog, columnMappingFollows)
+
+    const columnMappingLikes = {
+      through: 'Likes',
+      otherKey: 'postId',
+      foreignKey: 'userId'
+    };
+    User.belongsToMany(models.Post, columnMappingLikes)
   };
 
   User.prototype.toSafeObject = function () {
