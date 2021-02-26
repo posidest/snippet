@@ -33,7 +33,7 @@ const App = () => {
             <CreateUser />
           </Route>
           <Route path='/dashboard'>
-            <Dashboard isLoaded={isLoaded} />
+            <Dashboard />
           </Route>
           <Route path='/new/image'>
             <ImageForm />
