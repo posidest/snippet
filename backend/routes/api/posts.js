@@ -72,6 +72,19 @@ router.post(
 )
 
 
+//get posts
+
+router.get(
+    '/',
+    asyncHandler(async (req, res) => {
+        const posts = await Post.findAll({
+            where: {
+
+            }
+        })
+    })
+)
+
 
 
 

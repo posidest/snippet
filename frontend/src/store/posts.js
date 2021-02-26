@@ -3,12 +3,30 @@ import { csrfFetch } from './csrf';
 
 const POST_MEDIA = 'post/createPost'
 
+const GET_USER_POSTS = 'post/showPosts'
 
+
+const userPosts = (posts) => ({
+    type: GET_USER_POSTS,
+    payload: posts
+})
 
 const createPost = (post) => ({
     type: POST_MEDIA,
     payload: post
 });
+
+
+// export const showPosts = (posts) => async (dispatch) => {
+//     const res = await csrfFetch('/api/posts/')
+// }
+
+
+
+
+
+
+
 
 
 export const postImage = (post) => async (dispatch) => {
