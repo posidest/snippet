@@ -78,10 +78,9 @@ router.get(
     '/',
     asyncHandler(async (req, res) => {
         const posts = await Post.findAll({
-            where: {
-
-            }
-        })
+            include: User
+        });
+        return res.json({ posts })
     })
 )
 
