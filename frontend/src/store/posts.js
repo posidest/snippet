@@ -3,11 +3,11 @@ import { csrfFetch } from './csrf';
 
 const POST_MEDIA = 'post/createPost'
 
-const GET_USER_POSTS = 'post/showPosts'
+const GET_POSTS = 'post/displayPosts'
 
 
-const userPosts = (posts) => ({
-    type: GET_USER_POSTS,
+const displayPosts = (posts) => ({
+    type: GET_POSTS,
     payload: posts
 })
 
@@ -17,16 +17,15 @@ const createPost = (post) => ({
 });
 
 
-// export const showPosts = (posts) => async (dispatch) => {
-//     const res = await csrfFetch('/api/posts/')
-// }
-
-
-
-
-
-
-
+export const showPosts = () => async (dispatch) => {
+    const res = await csrfFetch('/api/posts');
+    if (res.ok) {
+        const data = await res.json();
+        console.log('data from thunk', data)
+        dispatch(displayPosts(data.posts));
+        return res;
+    }
+}
 
 
 export const postImage = (post) => async (dispatch) => {
@@ -96,6 +95,9 @@ export default function postReducer(state = { post: null }, action) {
     switch (action.type) {
         case POST_MEDIA:
             newState = { ...state, post: action.payload }
+            return newState;
+        case GET_POSTS:
+            newState = { ...state, posts: action.payload }
             return newState;
         default: return state;
     }
