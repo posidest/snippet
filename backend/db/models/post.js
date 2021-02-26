@@ -16,12 +16,13 @@ module.exports = (sequelize, DataTypes) => {
     };
     Post.belongsToMany(models.Blog, columnMappingBlogPosts);
 
-    const columnMappingLikes = {
-      through: 'Likes',
-      otherKey: 'userId',
-      foreignKey: 'postId'
-    };
-    Post.belongsToMany(models.User, columnMappingLikes);
+    // const columnMappingLikes = {
+    //   through: 'Likes',
+    //   otherKey: 'userId',
+    //   foreignKey: 'postId'
+    // };
+    // Post.belongsToMany(models.User, columnMappingLikes);
+    Post.hasMany(models.Like, { foreignKey: 'postId' })
 
   };
   return Post;

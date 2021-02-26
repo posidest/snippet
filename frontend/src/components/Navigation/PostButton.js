@@ -9,9 +9,9 @@ const PostButton = () => {
     const [showMenu, setShowMenu] = useState(false);
     // const [type, setType] = useState('image')
     const menuItems = [
-        { to: '/new/image', copy: 'Image' },
-        { to: '/new/words', copy: 'Words' },
-        { to: '/new/link', copy: 'Link' }
+        { to: '/new/image', icon: <i className='fas fa-camera-retro' />, copy: 'Image' },
+        { to: '/new/words', icon: <i className='fas fa-font' />, copy: 'Words' },
+        { to: '/new/link', icon: <i className='fas fa-link' />, copy: 'Link' }
     ];
 
     const history = useHistory();
@@ -40,10 +40,10 @@ const PostButton = () => {
             </div>
             {showMenu && (
                 <ul className="post-dropdown">
-                    {menuItems.map(({ to, copy }) => (
+                    {menuItems.map(({ to, icon, copy }) => (
                         <li key={copy}>
                             <NavLink to={to}>
-                                {copy}
+                                {icon}{copy}
                             </NavLink>
                         </li>
                     ))}

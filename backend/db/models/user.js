@@ -59,12 +59,14 @@ module.exports = (sequelize, DataTypes) => {
     };
     User.belongsToMany(models.Blog, columnMappingFollows)
 
-    const columnMappingLikes = {
-      through: 'Likes',
-      otherKey: 'postId',
-      foreignKey: 'userId'
-    };
-    User.belongsToMany(models.Post, columnMappingLikes)
+    // const columnMappingLikes = {
+    //   through: 'Likes',
+    //   otherKey: 'postId',
+    //   foreignKey: 'userId'
+    // };
+    // User.belongsToMany(models.Post, columnMappingLikes)
+
+    User.hasMany(models.Like, { foreignKey: 'userId' })
   };
 
   User.prototype.toSafeObject = function () {

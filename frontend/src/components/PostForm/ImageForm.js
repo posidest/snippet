@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import React from 'react';
-import { postSomething } from '../../store/posts';
+import { postImage } from '../../store/posts';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom'
 
 const ImageForm = () => {
     const [userId, setUserId] = useState('')
@@ -11,18 +12,19 @@ const ImageForm = () => {
     const [errors, setErrors] = useState([]);
 
     const dispatch = useDispatch();
-
+    const history = useHistory()
     const user = useSelector((state) => state.session.user)
-    setUserId(user.id);
+    // setUserId(user.id);
 
     const submitForm = (e) => {
         e.preventDefault();
         let newErrors = [];
-        dispatch(postSomething({
+        console.log('inside submit form')
+        dispatch(postImage({
             type,
             content,
             caption,
-            userId,
+            userId: user.id,
         }))
             .then(() => (
                 setUserId(''),
@@ -36,6 +38,7 @@ const ImageForm = () => {
                     setErrors(newErrors);
                 }
             });
+        // history.push('/dashboard')
     }
 
     const updateFile = (e) => {
@@ -48,7 +51,7 @@ const ImageForm = () => {
         <div>
             <form onSubmit={submitForm}>
                 <div className='errors'>
-                    {errors.length && errors.map(err => (
+                    {errors && errors.map(err => (
                         <p key={err}>{err}</p>
                     ))}
                 </div>
@@ -58,6 +61,7 @@ const ImageForm = () => {
             </form>
         </div >
     )
+
 }
 
 

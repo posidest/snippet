@@ -11,7 +11,7 @@ const createPost = (post) => ({
 });
 
 
-export const postSomething = (post) => async (dispatch) => {
+export const postImage = (post) => async (dispatch) => {
     const { type, content, caption, userId } = post;
     const formData = new FormData();
     formData.append('type', type);
@@ -20,7 +20,7 @@ export const postSomething = (post) => async (dispatch) => {
 
     if (caption) formData.append('caption', caption);
 
-    const res = await csrfFetch('/api/posts/', {
+    const res = await csrfFetch('/api/posts/image', {
         method: 'POST',
         headers: {
             'Content-Type': 'multipart/form-data',
@@ -29,11 +29,48 @@ export const postSomething = (post) => async (dispatch) => {
     });
     if (res.ok) {
         const data = await res.json();
+        console.log('data from thunk', data)
         dispatch(createPost(data.post))
         return res;
     }
 }
 
+
+export const postWords = (post) => async (dispatch) => {
+    const { type, content, caption, userId } = post;
+
+    const res = await csrfFetch('/api/posts/words', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(post),
+    });
+    if (res.ok) {
+        const data = await res.json();
+        console.log('data from thunk', data)
+        dispatch(createPost(data.post))
+        return res;
+    }
+}
+
+export const postLink = (post) => async (dispatch) => {
+    const { type, content, caption, userId } = post;
+
+    const res = await csrfFetch('/api/posts/link', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(post),
+    });
+    if (res.ok) {
+        const data = await res.json();
+        console.log('data from thunk', data)
+        dispatch(createPost(data.post))
+        return res;
+    }
+}
 
 
 export default function postReducer(state = { post: null }, action) {

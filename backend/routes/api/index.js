@@ -10,7 +10,7 @@ const postsRouter = require('./posts.js')
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
-router.use('/post', postsRouter)
+router.use('/posts', postsRouter)
 
 // get /api/set-token-cookie
 // router.get('/set-token-cookie', asyncHandler(async (req, res) => {
