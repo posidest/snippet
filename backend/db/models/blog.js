@@ -2,7 +2,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Blog = sequelize.define('Blog', {
     userId: DataTypes.INTEGER,
-    avatar: DataTypes.STRING
   }, {});
   Blog.associate = function (models) {
     Blog.belongsTo(models.User, { foreignKey: 'userId' })
@@ -14,12 +13,13 @@ module.exports = (sequelize, DataTypes) => {
     };
     Blog.belongsToMany(models.Post, columnMappingBlogPosts)
 
-    const columnMappingFollows = {
-      through: 'Follows',
-      foreignKey: 'blogId',
-      otherKey: 'userId'
-    };
-    Blog.belongsToMany(models.User, columnMappingFollows)
+    // const columnMappingFollows = {
+    //   through: 'Follows',
+    //   foreignKey: 'blogId',
+    //   otherKey: 'userId'
+    // };
+    // Blog.belongsToMany(models.User, columnMappingFollows)
+    Blog.hasMany(models.Follow, { foreignKey: 'blogId' })
 
   };
   return Blog;

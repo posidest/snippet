@@ -4,8 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     blogId: DataTypes.INTEGER,
     postId: DataTypes.INTEGER
   }, {});
-  BlogPost.associate = function(models) {
-    // associations can be defined here
+  BlogPost.associate = function (models) {
+    BlogPost.belongsTo(models.Blog, { foreignkey: 'blogId' });
+    BlogPost.belongsTo(models.Post, { foreignKey: 'postId' })
   };
   return BlogPost;
 };

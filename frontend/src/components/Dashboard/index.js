@@ -1,22 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-// import pic1 from '../../images/5.jpg'
-// import pic2 from '../../images/20.jpg'
-// import pic3 from '../../images/14.jpg'
-// import pic4 from '../../images/8.jpg'
-// import pic5 from '../../images/40.jpg'
-// import pic6 from '../../images/37.jpg'
-// import pic7 from '../../images/32.jpg'
-// import pic8 from '../../images/21.jpg'
-// import pic9 from '../../images/27.jpg'
-// import pic10 from '../../images/4.jpg'
-// import pic11 from '../../images/9.jpg'
-// import pic12 from '../../images/12.jpg'
-// import avatar from '../../images/face.jpg'
+
+import palette from '../../images/palette.jpg'
 import './Dashboard.css';
 import { showPosts } from '../../store/posts'
-
+import { likeAPost } from '../../store/likes'
 
 const Dashboard = () => {
 
@@ -28,16 +17,20 @@ const Dashboard = () => {
 
     const posts = useSelector(state => state.post.posts);
 
+    // const likePost = (e) => {
+    //     dispatch(likeAPost(sessionUser.id, e.target.id))
+    // }
+
 
     if (posts) {
         return (
             <div className='dash'>
                 {posts.map(post => (
                     <div className='center' key={post.id}>
-                        <img src={post.User.avatar} alt='avatar' className='avatar' />
+                        <img src={post.User.avatar || palette} alt='avatar' className='avatar' />
                         <div className='content-div'>
                             <div className='blog-info'>
-                                <a href='https://meow-zah.tumblr.com/'>quixotics</a>
+                                <a href={`/${post.Blog}`}>{post.User.blogName}</a>
                                 <i className='fas fa-sync-alt fa-lg' />
                                 <a href='https://mentaltimetraveller.tumblr.com/'>mental time traveller</a>
                             </div>
@@ -45,8 +38,8 @@ const Dashboard = () => {
                             {post.type === 'words' && <p>{post.content}</p>}
                             {post.type === 'link' && <a href={post.content}>{post.content}</a>}
                             <p>{post.caption}</p>
-                            <a href='blah.com' className='likes'>578478 likes</a>
-                            <div className='dash-btns'><i className="fas fa-heart fa-lg" />< i className="fas fa-sync-alt fa-lg" /></div>
+                            <a href='/posts/id/likes' className='likes'>{post.Likes.length} likes</a>
+                            <div className='dash-btns'><i className="fas fa-heart fa-lg" onClick={() => dispatch(likeAPost({ userId: sessionUser.id, postId: post.id }))} />< i className="fas fa-sync-alt fa-lg" /></div>
                         </div>
                     </div>
                 ))}
