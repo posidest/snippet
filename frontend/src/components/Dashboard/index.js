@@ -1,49 +1,141 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-
+import { Redirect, NavLink } from 'react-router-dom';
 import palette from '../../images/palette.jpg'
 import './Dashboard.css';
 import { showPosts } from '../../store/posts'
-import { likeAPost } from '../../store/likes'
+import { likeAPost, showLikes, unLikePost } from '../../store/likes'
+import { followBlog, showFollows, unFollowBlog } from '../../store/follows'
+
 
 const Dashboard = () => {
 
+    const [likes, setLikes] = useState([])
+    const [follows, setFollows] = useState([]);
+
     const dispatch = useDispatch();
+
     const sessionUser = useSelector(state => state.session.user);
+    const posts = useSelector(state => state.post.posts);
+    const userLikes = useSelector(state => state.likes.userLikes)
+    const userFollows = useSelector(state => state.follows.userFollows)
+
+
     useEffect(() => {
         dispatch(showPosts())
+            .then(() => dispatch(showFollows()))
+            .then(() => dispatch(showLikes()))
     }, [dispatch])
 
-    const posts = useSelector(state => state.post.posts);
 
-    // const likePost = (e) => {
-    //     dispatch(likeAPost(sessionUser.id, e.target.id))
-    // }
+    useEffect(() => {
+        if (posts && userLikes && userFollows) {
+            const followed = userFollows.map(follow => follow.blogId);
+            const liked = userLikes.map(like => like.postId);
+            setFollows(followed);
+            setLikes(liked);
+        }
+        else return;
+    }, [userLikes, userFollows, dispatch])
 
 
-    if (posts) {
+    if (!sessionUser) {
+        return <Redirect to='/' />
+    }
+
+    if (posts && userLikes && userFollows) {
+
         return (
             <div className='dash'>
-                {posts.map(post => (
-                    <div className='center' key={post.id}>
-                        <img src={post.User.avatar || palette} alt='avatar' className='avatar' />
+                <img src={sessionUser.avatar || palette} className='user-avatar' />
+                <div className='post-div'>
+                    <div className='post-buttons'>
+                        <NavLink to='/new/image'>
+                            <i className='fas fa-camera-retro fa-2x'
+                                style={{ color: 'red' }} />
+                            <p>Image</p>
+                        </NavLink>
+                        <NavLink to='/new/words'>
+                            <i className='fas fa-font fa-2x'
+                                style={{ color: 'DeepSkyBlue' }} />
+                            <p>Words</p>
+                        </NavLink>
+                        <NavLink to='/new/link'>
+                            <i className='fas fa-link fa-2x'
+                                style={{ color: 'green' }} />
+                            <p>Link</p>
+                        </NavLink>
+                    </div>
+                </div>
+                {posts.map((post) => (
+                    <div className='dash'
+                        key={post.id}>
+                        <img src={post.User.avatar || palette}
+                            alt='avatar'
+                            className='avatar' />
                         <div className='content-div'>
                             <div className='blog-info'>
-                                <a href={`/${post.Blog}`}>{post.User.blogName}</a>
-                                <i className='fas fa-sync-alt fa-lg' />
-                                <a href='https://mentaltimetraveller.tumblr.com/'>mental time traveller</a>
+                                <a href='/blog'>
+                                    {post.User.blogName}
+                                </a>
+                                {/* <i className='fas fa-sync-alt fa-lg' /> */}
+                                <p className='follow'
+                                    style={follows.includes(post.Blogs.id) ?
+                                        { color: 'gray' } :
+                                        {
+                                            color: 'DeepSkyBlue',
+                                            fontWeight: 'bold',
+                                            fontSize: '11px',
+                                            cursor: 'pointer'
+                                        }}
+                                    value={post.Blogs.id}
+                                    onClick={() => !follows.includes(post.Blogs.id) ?
+                                        dispatch(followBlog({
+                                            userId: sessionUser.id,
+                                            blogId: post.Blogs[0].id
+                                        })) :
+                                        dispatch(unFollowBlog({
+                                            userId: sessionUser.id,
+                                            blogId: post.Blogs[0].id
+                                        }))}
+                                >Follow</p>
                             </div>
-                            {post.type === 'image' && <img src={post.content} alt='picture' className='dash-img' />}
+                            <div className='underline'>
+                            </div>
+                            {post.type === 'image' &&
+                                <img src={post.content}
+                                    alt='picture'
+                                    className='dash-img' />}
                             {post.type === 'words' && <p>{post.content}</p>}
-                            {post.type === 'link' && <a href={post.content}>{post.content}</a>}
+                            {post.type === 'link' &&
+                                <a href={post.content}>
+                                    {post.content}
+                                </a>}
                             <p>{post.caption}</p>
+                            <div className='underline'>
+                            </div>
+                            <div className='dash-btns'>
+                                <i className="fas fa-heart fa-lg"
+                                    value={post.id}
+                                    onClick={() => !likes.includes(post.id) ?
+                                        dispatch(likeAPost({
+                                            userId: sessionUser.id,
+                                            postId: post.id
+                                        })) :
+                                        dispatch(unLikePost({
+                                            userId: sessionUser.id,
+                                            postId: post.id
+                                        }))}
+                                    style={likes.includes(post.id) ? { color: 'red' } : { color: 'none' }}
+                                />
+                                < i className="fas fa-sync-alt fa-lg" />
+                            </div>
                             <a href='/posts/id/likes' className='likes'>{post.Likes.length} likes</a>
-                            <div className='dash-btns'><i className="fas fa-heart fa-lg" onClick={() => dispatch(likeAPost({ userId: sessionUser.id, postId: post.id }))} />< i className="fas fa-sync-alt fa-lg" /></div>
                         </div>
                     </div>
-                ))}
-            </div>
+                ))
+                }
+            </div >
         )
     }
     else {

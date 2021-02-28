@@ -28,7 +28,7 @@ const validateSignup = [
     handleValidationErrors,
 ];
 
-
+//user signup
 router.post(
     '/',
     singleMulterUpload('avatar'),
@@ -56,7 +56,18 @@ router.post(
     }),
 );
 
-
+//find a user
+router.get(
+    '/:blogName(\\w{4+})',
+    asyncHandler(async (req, res) => {
+        const blogName = req.params.blogName;
+        const user = await User.findAll({
+            where: {
+                blogName
+            }
+        })
+        return res.json({ user });
+    }))
 
 
 

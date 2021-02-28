@@ -2,30 +2,29 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.center {
+    justify-content: center;
     position: relative;
     width: 700px;
-}
+    margin: 0 auto;
+} 
 
 .avatar {
-   border-radius: 4px;
-    width: 55px;
-    height: 55px;
+   border-radius: 3px;
+    width: 60px;
+    height: 60px;
     position: absolute;
-    right: 700px;
-    top: 20px;
+    right: 620px;
+    top: 10px;
 }
 
 .content-div {
     width: 500px;
-    padding: 40px 0 20px 0;
+    padding: 10px 0 20px 0;
     background-color: white;
-    margin: 20px;
-    border-radius: 4px;
+    margin: 10px;
+    border-radius: 3px;
+    position: relative;
 }
-
 
 .content-div img {
     width: 500px;
@@ -33,37 +32,87 @@
 
 .content-div p {
     color: black;
-    font-size: 12px;
-    padding: 15px;
+    font-size: 11px;
+    padding: 10px;
 }
 
 .content-div i {
     color: gray;
 }
 
+.dash-btns {
+    padding: 10px;
+}
+
+.dash-btns i {
+position: absolute;
+bottom: 12px;
+cursor: pointer;
+}
+
+.fa-heart {
+    right: 10px;
+}
+
+.fa-heart:hover {
+    color: red;
+}
+
+.fa-sync-alt {
+    right: 40px;
+} 
+
 .likes {
     position: absolute;
-    left: 30px;
+    left: 15px;
+    bottom: 12px;
+    color: gray;
 }
 
 .blog-info {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    left: 165px;
-    top: 30px;
+    align-items:center;
+    justify-content: flex-start;
+    height: 30px;
 }
-
 
 .blog-info a {
     color: black;
+    font-size: 11px;
+    margin-left: 20px;
 }
 
-.center a {
-  padding: 5px;
-    text-decoration: none;
- font-size: 12px;
-color: gray;
-font-weight: bold;
+.underline {
+    border-bottom: 1px solid rgba(200,200,200,0.6);
+}
+
+.post-buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* padding-bottom: 20px; */
+    /* height: 30px; */
+}
+
+.post-buttons p {
+    color: black;
+    font-weight: lighter;
+}
+
+.post-div {
+    width: 500px;
+    height: 30px;
+    padding: 25px 0 25px 0;
+    background-color: white;
+    margin: 10px;
+    border-radius: 3px;
+}
+
+.user-avatar {
+    border-radius: 3px;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    right: 620px;
+    top: 22px;
 }

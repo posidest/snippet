@@ -1,20 +1,14 @@
 import React from 'react';
 import { useState, useEffect } from "react";
-// import { useDispatch } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
-// import { usePostType } from '../../context/PostContext'
-import './Navigation.css'
+import './DropDown.css'
+
 
 const PostButton = () => {
     const [showMenu, setShowMenu] = useState(false);
-    // const [type, setType] = useState('image')
-    const menuItems = [
-        { to: '/new/image', icon: <i className='fas fa-camera-retro' />, copy: 'Image' },
-        { to: '/new/words', icon: <i className='fas fa-font' />, copy: 'Words' },
-        { to: '/new/link', icon: <i className='fas fa-link' />, copy: 'Link' }
-    ];
 
     const history = useHistory();
+
     const openMenu = () => {
         if (showMenu) return;
         setShowMenu(true);
@@ -36,19 +30,30 @@ const PostButton = () => {
     return (
         <>
             <div onClick={openMenu} className='post-btn'>
-                <i className="fas fa-palette fa-lg" />
+                <i className="fas fa-palette fa-lg" style={{ color: 'deepskyblue' }} />
             </div>
             {showMenu && (
-                <ul className="post-dropdown">
-                    {menuItems.map(({ to, icon, copy }) => (
-                        <li key={copy}>
-                            <NavLink to={to}>
-                                {icon}{copy}
+                <div className='drop-down-post'>
+                    <ul>
+                        <li>
+                            <NavLink to='/new/image'>
+                                Image
                             </NavLink>
                         </li>
-                    ))}
-                </ul>
-            )}
+                        <li>
+                            <NavLink to='/new/words'>
+                                Words
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to='/new/link'>
+                                Link
+                            </NavLink>
+                        </li>
+                    </ul>
+                </div>
+            )
+            }
 
         </>
 

@@ -5,6 +5,8 @@ const POST_MEDIA = 'post/createPost'
 
 const GET_POSTS = 'post/displayPosts'
 
+const GET_BLOG_POSTS = 'post/showBlog'
+
 
 const displayPosts = (posts) => ({
     type: GET_POSTS,
@@ -16,6 +18,11 @@ const createPost = (post) => ({
     payload: post
 });
 
+const showBlog = (blogPosts) => ({
+    type: GET_BLOG_POSTS,
+    payload: blogPosts
+})
+
 
 export const showPosts = () => async (dispatch) => {
     const res = await csrfFetch('/api/posts');
@@ -23,6 +30,18 @@ export const showPosts = () => async (dispatch) => {
         const data = await res.json();
         console.log('data from thunk', data)
         dispatch(displayPosts(data.posts));
+        return res;
+    }
+}
+
+
+export const populateBlog = (blog) => async (dispatch) => {
+    const { userId } = blog;
+    const res = await csrfFetch(`/api/posts/${userId}`)
+    if (res.ok) {
+        const data = await res.json();
+        console.log(data)
+        dispatch(showBlog(data.blogPosts));
         return res;
     }
 }
@@ -51,7 +70,6 @@ export const postImage = (post) => async (dispatch) => {
         return res;
     }
 }
-
 
 export const postWords = (post) => async (dispatch) => {
     const { type, content, caption, userId } = post;
@@ -98,6 +116,9 @@ export default function postReducer(state = { post: null }, action) {
             return newState;
         case GET_POSTS:
             newState = { ...state, posts: action.payload }
+            return newState;
+        case GET_BLOG_POSTS:
+            newState = { ...state, posts: [...state.posts], blogPosts: action.payload }
             return newState;
         default: return state;
     }

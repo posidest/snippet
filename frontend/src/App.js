@@ -10,6 +10,7 @@ import WordsForm from './components/PostForm/WordsForm';
 import LinkForm from './components/PostForm/LinkForm'
 import Dashboard from './components/Dashboard';
 import CreateUser from './components/CreateUser'
+import UserBlog from './components/UserBlog';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const App = () => {
       {isLoaded && (
         <Switch>
           <Route exact path='/'>
-            <LandingPage isLoaded={isLoaded} />
+            <LandingPage />
           </Route>
           <Route path='/login'>
             <LoginFormPage />
@@ -33,7 +34,7 @@ const App = () => {
             <CreateUser />
           </Route>
           <Route path='/dashboard'>
-            <Dashboard isLoaded={isLoaded} />
+            <Dashboard />
           </Route>
           <Route path='/new/image'>
             <ImageForm />
@@ -44,8 +45,8 @@ const App = () => {
           <Route path='/new/link'>
             <LinkForm />
           </Route>
-          {/* <Route path='/create-user'>
-            <CreateUser />
+          {/* <Route path='/:blogName'>
+            <UserBlog />
           </Route> */}
         </Switch>
       )}

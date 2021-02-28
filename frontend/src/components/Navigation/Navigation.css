@@ -1,6 +1,6 @@
 
 .nav {
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     display: flex;
     position: fixed;
     justify-content: space-between;
@@ -14,22 +14,25 @@
     color: white;
     top: 10px;
     position: absolute;
+    cursor: pointer;
 }
-
-/* .nav button {
-    background-color: transparent;
-} */
-
 
 
 .fa-palette {
-    right: 5px;
+    right: 10px;
+    /* color: deepskyblue; */
 }
 
 .fa-user {
-    right: 20px;
+    right: 40px;
+    /* color: gray; */
 }
 
+
+.fa-cut {
+left: 10px;
+bottom: 20px;
+}
 
 .session {
     align-self: flex-end;
@@ -58,38 +61,6 @@
     background-color: #f2e9e4;
     right: 15px;
 }
-
- .profile-dropdown, .post-dropdown {
-    background-color: white;
-    padding: 5px;
-    border-radius: 4px;
-    font-size: 12px;
-    /* display: grid;
-    grid-template-columns: 1fr 5fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;; */
-    /* color: rgb(100,100,100);
-    text-decoration: none;
-} 
-
-
-ul {
-    /* grid-column-start: 2;
-    grid-column-end: 3; */
-    list-style-type: none;
-}
-
-li {
-    padding: 5px;
-}
-
-/* .profile-head {
-grid-column-start: 1;
-grid-column-end: 4;
-grid-row-start: 1;
-grid-row-end: 2;
-color: black;
-background: gray;
-} */
 
 
 @media screen and (max-width: 769px) {

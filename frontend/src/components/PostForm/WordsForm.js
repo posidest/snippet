@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { postWords } from '../../store/posts';
-import { useHistory } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 const WordsForm = () => {
     const [userId, setUserId] = useState('');
@@ -11,8 +11,9 @@ const WordsForm = () => {
     const [errors, setErrors] = useState('');
 
     const dispatch = useDispatch();
-    const history = useHistory()
+    // const history = useHistory()
     const user = useSelector((state) => state.session.user)
+    if (!user) <Redirect to='/' />
 
     const submitForm = (e) => {
         e.preventDefault()
@@ -29,16 +30,22 @@ const WordsForm = () => {
                 setType(''),
                 setContent(''),
                 setCaption('')
-            )).catch(async (res) => {
+            ))
+            .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) {
                     newErrors = data.errors;
                     setErrors(newErrors);
                 }
-            });
-        // history.push('/dashboard')
-
+            }).then(() => (
+                < Redirect to='/dashboard' />
+            ))
     }
+
+    // const buttonClick = (e) => {
+    //     e.preventDefault();
+    //     history.push('/dashboard')
+    // }
 
     return (
         <div>

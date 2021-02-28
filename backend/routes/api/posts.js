@@ -1,15 +1,11 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler');
-const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation')
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User, Blog, Post, Like, BlogPost, Follow } = require('../../db/models');
+const { User, Blog, Post, Like } = require('../../db/models');
 const { singlePublicFileUpload, singleMulterUpload } = require('../../awsS3');
 const router = express.Router()
-const { createBlogPost } = require('../../utils/blog');
-const { restoreUser } = require('../../utils/auth')
-// const { Sequelize } = require('sequelize/types');
-// const Op = Sequelize.Op;
+const { restoreUser } = require('../../utils/auth');
+
+
 
 //post an image
 router.post(
@@ -77,14 +73,75 @@ router.post(
 )
 
 
+//get likes for a logged in user
+router.get(
+    '/likes',
+    restoreUser,
+    asyncHandler(async (req, res) => {
+        const user = req.user;
+        const likes = await Like.findAll({
+            where: {
+                userId: user.id
+            }
+        })
+        return res.json({ likes })
+    })
+)
+
+
+//unlike a post
+router.delete(
+    '/:postId(\\d+)/likes',
+    restoreUser,
+    asyncHandler(async (req, res) => {
+        const user = req.user;
+        const { postId, userId } = req.body;
+        const id = req.params.postId;
+        if (user.id === userId && postId === id) {
+            const like = await Like.findAll({
+                where: {
+                    userId,
+                    postId
+                }
+            })
+            await like.destroy();
+            return res.json()
+        }
+    })
+)
+
+
+
 // get posts
 router.get(
     '/',
     asyncHandler(async (req, res) => {
         const posts = await Post.findAll({
-            include: [User, Like, Blog]
+            include: [User, Like, Blog],
+            order: [['createdAt', 'DESC']]
         });
         return res.json({ posts })
+    })
+)
+
+
+// populate user blog
+router.get(
+    '/:userId(\\d+)',
+    asyncHandler(async (req, res) => {
+        const id = req.params.userId;
+        // const user = await User.findAll({
+        //     where: {
+        //         blogName
+        //     }
+        // })
+        const blogPosts = await Post.findAll({
+            where: {
+                userId: id
+            },
+            include: [Like, User]
+        })
+        return res.json({ blogPosts })
     })
 )
 

@@ -13,6 +13,7 @@ const LinkForm = () => {
     const dispatch = useDispatch();
     const history = useHistory()
     const user = useSelector((state) => state.session.user)
+    if (!user) history.push('/')
 
     const submitForm = (e) => {
         e.preventDefault()
@@ -36,7 +37,6 @@ const LinkForm = () => {
                     setErrors(newErrors);
                 }
             });
-        // history.push('/dashboard')
     }
 
     return (

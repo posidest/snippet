@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
-import './Navigation.css';
+import './DropDown.css'
 
 function ProfileButton({ user }) {
     const dispatch = useDispatch();
@@ -32,20 +32,13 @@ function ProfileButton({ user }) {
 
     return (
         <>
-            <div onClick={openMenu} className='icon'>
+            <div onClick={openMenu} className='post-btn'>
                 < i className="fas fa-user fa-lg" />
             </div>
             {showMenu && (
-                <div className="profile-dropdown">
-                    <div className='profile-head'>
-                        <p>
-                            Account
-                        <span onClick={logout}> Log out</span>
-                        </p>
-                    </div>
+                <div className="drop-down-profile">
                     <ul>
                         <li>
-                            <i className='fas fa-heart' />
                             <NavLink to='/likes'>Likes </NavLink>
                         </li>
                         <li>
@@ -53,10 +46,10 @@ function ProfileButton({ user }) {
                         </li>
                         <li>{user.blogName}</li>
                         <li>{user.email}</li>
+                        <li onClick={logout} className='logout'>
+                            Log Out
+                        </li>
                     </ul>
-                    {/* <li>
-                        <button onClick={logout}>Log Out</button>
-                    </li> */}
                 </div>
             )}
         </>
