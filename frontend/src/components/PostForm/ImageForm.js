@@ -3,6 +3,7 @@ import React from 'react';
 import { postImage } from '../../store/posts';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom'
+import './PostForm.css'
 
 const ImageForm = () => {
     const [userId, setUserId] = useState('')
@@ -48,15 +49,19 @@ const ImageForm = () => {
 
 
     return (
-        <div>
-            <form onSubmit={submitForm}>
+        <div className='form-div'>
+            <form onSubmit={submitForm}
+                style={{ display: "flex", flexFlow: "column" }}>
                 <div className='errors' >
                     {errors && errors.map(err => (
                         <p key={err}>{err}</p>
                     ))}
                 </div>
-                <input type='file' onChange={updateFile} placeholder='upload a pic' />
-                <textarea onChange={(e) => setCaption(e.target.value)} value={caption} placeholder='add a caption' />
+                <label className='file-upload'>
+                    <input type='file' onChange={updateFile} placeholder='upload a pic' />
+                    Upload an Image
+                </label>
+                <textarea onChange={(e) => setCaption(e.target.value)} value={caption} placeholder='Add a Caption' />
                 <button type='submit'> Post</button>
             </form >
         </div >

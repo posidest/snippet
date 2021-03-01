@@ -30,6 +30,7 @@ li {
     font-size: 12px;
     padding: 4px;
     cursor: pointer;
+    color: black;
 }
 
 li a:hover {
@@ -38,11 +39,12 @@ li a:hover {
 
 li a {
         font-weight: lighter;
-    font-style: normal;
+        font-style: normal;
 }
 
 
 .logout {
+    padding-top: 10px;
     font-weight: bolder;
     font-style: normal;
 }

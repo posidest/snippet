@@ -2,10 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 
-.login-div {
-    background: center url('../../images/bg.jpg');
-    background-size: contain;
-     box-sizing: border-box;
+
+.form-div {
+    /* background: center url('../../images/bg.jpg');
+    background-size: contain; */
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;  
     height: 800px;
@@ -22,9 +23,9 @@ form {
     padding: 6px;
 }
 
-input {
+input, textarea {
     border-radius: 3px;
-    padding: 6px;
+    padding: 9px;
     background-color: white;
     border: none;
     margin: 6px;
@@ -33,19 +34,38 @@ input {
 
 button {
     border-radius: 3px;
-    padding: 6px;
+    padding: 10px;
     background-color: #8bbeb2; 
     /* border: 1px solid #ccc; */
     margin: 6px;
     font-weight: bold;
+    border: none;
 }
 
-.demo {
-    background-color: #9a8c98;
+input[type='file'] {
+    display: none;
 }
+
+
+.file-upload {
+    border-radius: 3px;
+    padding: 6px;
+    background-color: white;
+    border: 1px solid #ccc;
+    display: inline-block;
+    cursor: pointer;
+    color: black;
+    font-size: 12px;
+    margin: 6px;
+} 
 
 
 .logo {
     font-size: 4.5em;
     font-family: 'Bitter', serif;
+}
+
+textarea {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
 }

@@ -31,27 +31,33 @@ const LoginFormPage = () => {
 
 
     return (
-        <form onSubmit={handleSubmit}>
-            <ul>
-                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
-            <input
-                type='text'
-                value={credential}
-                onChange={(e) => setCredential(e.target.value)}
-                placeholder='Blog Name or Email'
-                required
-            />
-            <input
-                type='password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder='Password'
-                required
-            />
-            <button type='submit'>Log In</button>
-            <button type='button' onClick={handleDemoSubmit}>Demo</button>
-        </form>
+        <div className='login-div'>
+            <h1 className='logo'>snippet</h1>
+            <form onSubmit={handleSubmit}
+                style={{ display: "flex", flexFlow: "column" }}>
+                <div className='errors'>
+                    <ul>
+                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                    </ul>
+                </div>
+                <input
+                    type='text'
+                    value={credential}
+                    onChange={(e) => setCredential(e.target.value)}
+                    placeholder='Blog Name or Email'
+                    required
+                />
+                <input
+                    type='password'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder='Password'
+                    required
+                />
+                <button type='submit'>Log In</button>
+                <button type='button' onClick={handleDemoSubmit} className='demo'>Demo</button>
+            </form>
+        </div>
     );
 }
 

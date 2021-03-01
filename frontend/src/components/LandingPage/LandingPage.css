@@ -18,7 +18,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;  
-    height: 720px;
+    height: 800px;
     width: 100%;
     color: white;
     /* justify-content: center; */
@@ -47,7 +47,7 @@
 .third-view {
     background-color: #384e77;
      margin-top: 10px;
-     height: 780px;
+     height: 800px;
 }
 
 .second-view > .text, .third-view > .text {

@@ -117,8 +117,7 @@ router.get(
     '/',
     asyncHandler(async (req, res) => {
         const posts = await Post.findAll({
-            include: [User, Like, Blog],
-            order: [['createdAt', 'DESC']]
+            include: [Like, User, Blog]
         });
         return res.json({ posts })
     })

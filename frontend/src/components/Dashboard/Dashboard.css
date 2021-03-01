@@ -90,8 +90,7 @@ cursor: pointer;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    /* padding-bottom: 20px; */
-    /* height: 30px; */
+    margin-bottom: 20px;
 }
 
 .post-buttons p {
@@ -104,7 +103,7 @@ cursor: pointer;
     height: 30px;
     padding: 25px 0 25px 0;
     background-color: white;
-    margin: 10px;
+    margin: 70px 10px 10px 10px;
     border-radius: 3px;
 }
 
@@ -114,5 +113,5 @@ cursor: pointer;
     height: 60px;
     position: absolute;
     right: 620px;
-    top: 22px;
+    top: 70px;
 }

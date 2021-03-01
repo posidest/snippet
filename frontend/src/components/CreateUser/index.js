@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { createUser } from "../../store/session"
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
+import './CreateUser.css'
 
 const CreateUser = () => {
     const [blogName, setBlogName] = useState("");
@@ -21,7 +22,6 @@ const CreateUser = () => {
         if (password === confirmPassword) {
             setErrors([]);
             let newErrors = [];
-            // console.log('avatar:', avatar)
             dispatch(createUser({ blogName, email, password, avatar }))
                 .then(() => {
                     setBlogName("");
@@ -47,64 +47,51 @@ const CreateUser = () => {
     };
 
     return (
-        <div>
-            {errors.length > 0 &&
-                errors.map((error) => <div key={error}>{error}</div>)}
-            <form
-                style={{ display: "flex", flexFlow: "column" }}
-                onSubmit={handleSubmit}
-            >
-                <label>
+        <div className='create-user'>
+            <div className='errors'>
+                {errors.length > 0 &&
+                    errors.map((error) => <div key={error}>{error}</div>)}
+            </div>
+            <h1 className='logo'>snippet</h1>
+            <div className='form-div'>
+                <form
+                    style={{ display: "flex", flexFlow: "column" }}
+                    onSubmit={handleSubmit}
+                >
                     <input
                         type="text"
                         placeholder="Blog name"
                         value={blogName}
                         onChange={(e) => setBlogName(e.target.value)}
                     />
-                </label>
-                <label>
                     <input
                         type="email"
                         placeholder="Email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                </label>
-                <label>
                     <input
                         type="password"
                         placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                </label>
-                <label>
                     <input
                         type="password"
                         placeholder="Confirm Password"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
+                    <label class='file-upload'>
+                        <input type="file"
+                            onChange={updateFile} />
+                        Upload Avatar
                 </label>
-                <label>
-                    <input type="file" onChange={updateFile} />
-                </label>
-                <button type="submit">Create User</button>
-            </form>
-            {/* <div>
-                {user && (
-                    <div>
-                        <h1>{user.blogName}</h1>
-                        <img
-                            style={{ width: "150px" }}
-                            src={user.avatar}
-                            alt="avatar"
-                        />
-                    </div>
-                )}
-            </div> */}
+                    <button type="submit">Sign Up</button>
+                </form>
+            </div>
         </div>
-    );
+    )
 };
 
 export default CreateUser;

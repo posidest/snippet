@@ -28,15 +28,15 @@ const Dashboard = () => {
     }, [dispatch])
 
 
-    useEffect(() => {
-        if (posts && userLikes && userFollows) {
-            const followed = userFollows.map(follow => follow.blogId);
-            const liked = userLikes.map(like => like.postId);
-            setFollows(followed);
-            setLikes(liked);
-        }
-        else return;
-    }, [userLikes, userFollows, dispatch])
+    // useEffect(() => {
+    //     if (posts && userLikes && userFollows) {
+    //         const followed = userFollows.map(follow => Number(follow.blogId));
+    //         const liked = userLikes.map(like => Number(like.postId));
+    //         setFollows(followed);
+    //         setLikes(liked);
+    //     }
+    // else return;
+    // }, [userLikes, userFollows, dispatch])
 
 
     if (!sessionUser) {
@@ -44,6 +44,9 @@ const Dashboard = () => {
     }
 
     if (posts && userLikes && userFollows) {
+
+        const followed = userFollows.map(follow => follow.blogId);
+        const liked = userLikes.map(like => like.postId);
 
         return (
             <div className='dash'>
@@ -78,9 +81,8 @@ const Dashboard = () => {
                                 <a href='/blog'>
                                     {post.User.blogName}
                                 </a>
-                                {/* <i className='fas fa-sync-alt fa-lg' /> */}
                                 <p className='follow'
-                                    style={follows.includes(post.Blogs.id) ?
+                                    style={followed.includes(post.Blogs.id) ?
                                         { color: 'gray' } :
                                         {
                                             color: 'DeepSkyBlue',
@@ -89,7 +91,7 @@ const Dashboard = () => {
                                             cursor: 'pointer'
                                         }}
                                     value={post.Blogs.id}
-                                    onClick={() => !follows.includes(post.Blogs.id) ?
+                                    onClick={() => !followed.includes(post.Blogs.id) ?
                                         dispatch(followBlog({
                                             userId: sessionUser.id,
                                             blogId: post.Blogs[0].id
@@ -117,7 +119,7 @@ const Dashboard = () => {
                             <div className='dash-btns'>
                                 <i className="fas fa-heart fa-lg"
                                     value={post.id}
-                                    onClick={() => !likes.includes(post.id) ?
+                                    onClick={() => !liked.includes(post.id) ?
                                         dispatch(likeAPost({
                                             userId: sessionUser.id,
                                             postId: post.id
@@ -126,7 +128,7 @@ const Dashboard = () => {
                                             userId: sessionUser.id,
                                             postId: post.id
                                         }))}
-                                    style={likes.includes(post.id) ? { color: 'red' } : { color: 'none' }}
+                                    style={liked.includes(post.id) ? { color: 'red' } : { color: 'none' }}
                                 />
                                 < i className="fas fa-sync-alt fa-lg" />
                             </div>
