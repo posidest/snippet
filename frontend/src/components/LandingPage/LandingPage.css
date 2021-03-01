@@ -18,7 +18,6 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;  
-    height: 900px;
     width: 100%;
     color: white;
     /* justify-content: center; */
@@ -31,6 +30,7 @@
     /* background: center url('../../images/41.jpg'); */
     background-size: contain;
     background-repeat: none;
+    height: 720px;
 }
 
 .first-view > .text > h1 {
@@ -45,7 +45,7 @@
     /* background-color: springgreen; */
      margin-top: 10px;
      position: relative;
-     height: 900px;
+     height: 800px;
 }
 
 .third-view {

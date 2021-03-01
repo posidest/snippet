@@ -10,9 +10,11 @@ const { restoreUser } = require('../../utils/auth');
 //post an image
 router.post(
     '/image',
+    restoreUser,
     singleMulterUpload('content'),
     asyncHandler(async (req, res) => {
-        const { type, userId, caption } = req.body;
+        const { type, caption } = req.body;
+        const userId = req.user.id;
         const content = await singlePublicFileUpload(req.file);
 
         const post = await Post.create({
@@ -30,8 +32,10 @@ router.post(
 //post some words
 router.post(
     '/words',
+    restoreUser,
     asyncHandler(async (req, res) => {
-        const { type, content, caption, userId } = req.body;
+        const { type, content, caption } = req.body;
+        const userId = req.user.id;
         const post = await Post.create({
             type,
             content,
@@ -45,8 +49,10 @@ router.post(
 //post a link
 router.post(
     '/link',
+    restoreUser,
     asyncHandler(async (req, res) => {
-        const { type, content, caption, userId } = req.body;
+        const { type, content, caption } = req.body;
+        const userId = req.user.id;
         const post = await Post.create({
             type,
             content,
@@ -113,6 +119,17 @@ router.delete(
 
 
 // get posts
+// router.get(
+//     '/',
+//     asyncHandler(async (req, res) => {
+//         const posts = await Post.findAll({
+//             order: [['createdAt', 'DESC']],
+//             include: [Like, User, Blog],
+//         });
+//         return res.json({ posts })
+//     })
+// )
+
 router.get(
     '/',
     asyncHandler(async (req, res) => {
@@ -122,6 +139,7 @@ router.get(
         return res.json({ posts })
     })
 )
+
 
 
 // populate user blog

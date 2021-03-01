@@ -16,7 +16,6 @@ const Dashboard = () => {
     const dispatch = useDispatch();
 
     const sessionUser = useSelector(state => state.session.user);
-    const posts = useSelector(state => state.post.posts);
     const userLikes = useSelector(state => state.likes.userLikes)
     const userFollows = useSelector(state => state.follows.userFollows)
 
@@ -27,6 +26,7 @@ const Dashboard = () => {
             .then(() => dispatch(showLikes()))
     }, [dispatch])
 
+    const posts = useSelector(state => state.post.posts);
 
     // useEffect(() => {
     //     if (posts && userLikes && userFollows) {
