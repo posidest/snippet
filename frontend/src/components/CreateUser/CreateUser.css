@@ -5,6 +5,7 @@
 
 .create-user {
     background: center url('../../images/bg.jpg');
+    /* background: center url('../../images/8.jpg'); */
     background-size: contain;
      box-sizing: border-box;
     display: flex;

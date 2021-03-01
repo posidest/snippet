@@ -2,11 +2,11 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useSelector } from 'react-redux'
 import { NavLink, Redirect, useHistory } from 'react-router-dom';
 import './LandingPage.css';
-import pic1 from '../../images/12.jpg';
-import pic2 from '../../images/9.jpg';
-import pic3 from '../../images/41.jpg';
-import pic4 from '../../images/28.jpg';
-import pic5 from '../../images/10.jpg';
+import pic1 from '../../images/5.jpg';
+import pic2 from '../../images/7.jpg';
+import pic3 from '../../images/9.jpg';
+import pic4 from '../../images/11.jpg';
+import pic5 from '../../images/13.jpg';
 
 let pics = [pic1, pic2, pic3, pic4, pic5];
 

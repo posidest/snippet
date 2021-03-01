@@ -18,7 +18,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;  
-    height: 800px;
+    height: 720px;
     width: 100%;
     color: white;
     /* justify-content: center; */
@@ -28,7 +28,9 @@
 
 .first-view {
     background: center url('../../images/bg.jpg');
+    /* background: center url('../../images/41.jpg'); */
     background-size: contain;
+    background-repeat: none;
 }
 
 .first-view > .text > h1 {
@@ -40,12 +42,15 @@
 
 .second-view {
     background-color: #8bbeb2;
+    /* background-color: springgreen; */
      margin-top: 10px;
      position: relative;
+     height: 800px;
 }
 
 .third-view {
     background-color: #384e77;
+    /* background-color: deepskyblue; */
      margin-top: 10px;
      height: 800px;
 }
@@ -87,6 +92,7 @@
 
 .login{
     background-color: #9a8c98;
+    /* background-color: springgreen; */
       width: fit-content;
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
@@ -95,6 +101,7 @@
 
 .signup {
     background-color: #f2e9e4;
+    /* background-color: deepskyblue; */
       width: fit-content;
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
@@ -121,10 +128,14 @@ a {
     margin-top: 20px;;
 }
 
-.pic {
-    width: 170px;
+/* .pic {
+    width: 150px;
+    height: 200px;
     border-radius: 3px;
-}
+    background-color: white;
+    padding: 20px 0 20px 0;
+    margin: 10px;
+} */
 
 
 @media screen and (max-width: 769px) {

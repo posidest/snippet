@@ -61,7 +61,7 @@ const Dashboard = () => {
                         </NavLink>
                         <NavLink to='/new/words'>
                             <i className='fas fa-font fa-2x'
-                                style={{ color: 'DeepSkyBlue' }} />
+                                style={{ color: 'deepskyblue' }} />
                             <p>Words</p>
                         </NavLink>
                         <NavLink to='/new/link'>
