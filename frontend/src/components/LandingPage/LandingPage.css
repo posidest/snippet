@@ -116,9 +116,14 @@ a {
 }
 
 .landing-pics img {
-    max-width: 150px;
+    width: 150px;
     padding: 20px;
     margin-top: 20px;;
+}
+
+.pic {
+    width: 170px;
+    border-radius: 3px;
 }
 
 

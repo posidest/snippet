@@ -25,7 +25,6 @@ ul {
     padding-right: 45px;
 }
 
-
 li {
     font-size: 12px;
     padding: 4px;
@@ -41,7 +40,6 @@ li a {
         font-weight: lighter;
         font-style: normal;
 }
-
 
 .logout {
     padding-top: 10px;

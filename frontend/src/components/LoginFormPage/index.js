@@ -32,14 +32,15 @@ const LoginFormPage = () => {
 
     return (
         <div className='login-div'>
+            <div className='errors'>
+                <ul>
+                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>
+            </div>
             <h1 className='logo'>snippet</h1>
+            <h2>Make stuff, look at stuff, get inspired.</h2>
             <form onSubmit={handleSubmit}
                 style={{ display: "flex", flexFlow: "column" }}>
-                <div className='errors'>
-                    <ul>
-                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                    </ul>
-                </div>
                 <input
                     type='text'
                     value={credential}

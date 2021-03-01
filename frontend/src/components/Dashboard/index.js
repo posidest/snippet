@@ -50,7 +50,8 @@ const Dashboard = () => {
 
         return (
             <div className='dash'>
-                <img src={sessionUser.avatar || palette} className='user-avatar' />
+                <img src={sessionUser.avatar || palette}
+                    className='user-avatar' />
                 <div className='post-div'>
                     <div className='post-buttons'>
                         <NavLink to='/new/image'>
@@ -109,10 +110,11 @@ const Dashboard = () => {
                                     alt='picture'
                                     className='dash-img' />}
                             {post.type === 'words' && <p>{post.content}</p>}
-                            {post.type === 'link' &&
+                            {post.type === 'link' && <div className='link'>
                                 <a href={post.content}>
                                     {post.content}
-                                </a>}
+                                </a>
+                            </div>}
                             <p>{post.caption}</p>
                             <div className='underline'>
                             </div>

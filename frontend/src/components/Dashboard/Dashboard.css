@@ -17,6 +17,10 @@
     top: 10px;
 }
 
+.link {
+    padding: 20px;
+}
+
 .content-div {
     width: 500px;
     padding: 10px 0 20px 0;
