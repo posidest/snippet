@@ -145,7 +145,7 @@ const Dashboard = () => {
     else {
         return (
             <div>
-                <h1>Dashboard Loading...</h1>
+                <h1 style={{ color: 'white' }}>Dashboard Loading...</h1>
             </div>
         )
     }

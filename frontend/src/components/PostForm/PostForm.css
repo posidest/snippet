@@ -69,3 +69,8 @@ textarea {
     font-family: 'Roboto', sans-serif;
     font-size: 12px;
 }
+
+.words {
+    width: 218px;
+    height: 60px;
+}

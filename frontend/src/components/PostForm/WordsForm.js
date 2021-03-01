@@ -52,7 +52,7 @@ const WordsForm = () => {
                         <p key={err}>{err}</p>
                     ))}
                 </div>
-                <textarea onChange={(e) => setContent(e.target.value)} value={content} placeholder='Write Something' />
+                <textarea onChange={(e) => setContent(e.target.value)} value={content} className='words' placeholder='Write Something' />
                 <textarea onChange={(e) => setCaption(e.target.value)} value={caption} placeholder='Add a Caption' />
                 <button type='submit'>Post</button>
             </form>
