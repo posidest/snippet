@@ -1,11 +1,11 @@
 import { csrfFetch } from './csrf';
 
 
-const POST_MEDIA = 'post/createPost'
+const POST_MEDIA = 'posts/createPost'
 
-const GET_POSTS = 'post/displayPosts'
+const GET_POSTS = 'posts/displayPosts'
 
-const GET_BLOG_POSTS = 'post/showBlog'
+const GET_BLOG_POSTS = 'posts/getBlogPosts'
 
 
 const displayPosts = (posts) => ({
@@ -18,7 +18,7 @@ const createPost = (post) => ({
     payload: post
 });
 
-const showBlog = (blogPosts) => ({
+const getBlogPosts = (blogPosts) => ({
     type: GET_BLOG_POSTS,
     payload: blogPosts
 })
@@ -29,7 +29,7 @@ export const showPosts = () => async (dispatch) => {
     if (res.ok) {
         const data = await res.json();
         console.log('data from thunk', data)
-        dispatch(displayPosts(data.posts));
+        dispatch(displayPosts(data));
         return res;
     }
 }
@@ -37,11 +37,11 @@ export const showPosts = () => async (dispatch) => {
 
 export const populateBlog = (blog) => async (dispatch) => {
     const { userId } = blog;
-    const res = await csrfFetch(`/api/posts/${userId}`)
+    const res = await csrfFetch(`/api/blog/${userId}`)
     if (res.ok) {
         const data = await res.json();
         console.log(data)
-        dispatch(showBlog(data.blogPosts));
+        dispatch(getBlogPosts(data));
         return res;
     }
 }
@@ -108,17 +108,17 @@ export const postLink = (post) => async (dispatch) => {
 }
 
 
-export default function postReducer(state = { post: null }, action) {
+export default function postReducer(state = {}, action) {
     let newState;
     switch (action.type) {
         case POST_MEDIA:
             newState = { ...state, post: action.payload }
             return newState;
         case GET_POSTS:
-            newState = { ...state, posts: action.payload }
+            newState = { ...state, postData: action.payload }
             return newState;
         case GET_BLOG_POSTS:
-            newState = { ...state, posts: [...state.posts], blogPosts: action.payload }
+            newState = { ...state, blogPosts: action.payload }
             return newState;
         default: return state;
     }

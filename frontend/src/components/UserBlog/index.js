@@ -1,25 +1,27 @@
 import React, { useState, userEffect, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { populateBlog } from '../../store/posts'
-import { findAUser } from '../../store/users'
+import { populateBlog } from '../../store/post'
+import { findAUser } from '../../store/user'
+import PostButton from '../Menus/PostButton';
 
 const UserBlog = () => {
     const dispatch = useDispatch();
     const { blogName } = useParams();
     const sessionUser = useSelector((state) => state.session.user);
-    console.log(blogName);
+    console.log(blogName);  
+    const user = useSelector((state) => state.user.user);
 
     useEffect(() => {
-        const user = dispatch(findAUser({ blogName: blogName })).then(() => {
-            dispatch(populateBlog({ userId: user.id }))
-        })
+        dispatch(findAUser({ blogName: blogName }))
     }, [dispatch])
 
-    // useEffect(() => {
-    //     dispatch(populateBlog({ userId: sessionUser.id }))
-    // }, [dispatch])
-    const blogOwner = useSelector((state) => state.user.user)
+    useEffect(() => {
+        if (user) {
+            dispatch(populateBlog({ userId: user.id }))
+        }
+    }, [dispatch])
+
     const blogPosts = useSelector((state) => state.post.blogPosts);
     console.log(blogPosts, 'blog posts')
 

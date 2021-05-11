@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { postWords } from '../../store/posts';
+import { postWords } from '../../store/post';
 import { Redirect } from 'react-router-dom'
 import './PostForm.css'
 

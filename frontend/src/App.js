@@ -45,6 +45,9 @@ const App = () => {
           <Route path='/new/link'>
             <LinkForm />
           </Route>
+          <Route path='/:blogName'>
+            <UserBlog />
+          </Route>
           {/* <Route path='/:blogName'>
             <UserBlog />
           </Route> */}

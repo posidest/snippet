@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, NavLink } from 'react-router-dom';
 import palette from '../../images/palette.jpg'
 import './Dashboard.css';
-import { showPosts } from '../../store/posts'
+import { showPosts } from '../../store/post'
 import { likeAPost, showLikes, unLikePost } from '../../store/likes'
 import { followBlog, showFollows, unFollowBlog } from '../../store/follows'
 
@@ -12,7 +12,7 @@ const Dashboard = () => {
 
     const [likes, setLikes] = useState([])
     const [follows, setFollows] = useState([]);
-
+    const [loaded,setLoaded] = useState(false)
     const dispatch = useDispatch();
 
     const sessionUser = useSelector(state => state.session.user);
@@ -24,9 +24,14 @@ const Dashboard = () => {
         dispatch(showPosts())
             .then(() => dispatch(showFollows()))
             .then(() => dispatch(showLikes()))
+            .then(() => setLoaded(true))
     }, [dispatch])
 
-    const posts = useSelector(state => state.post.posts);
+    let posts = useSelector(state => state.post.postData.postData);
+    if (posts) {
+        // posts = posts['postData'];
+        console.log(posts)
+    }
 
     // useEffect(() => {
     //     if (posts && userLikes && userFollows) {
@@ -43,8 +48,7 @@ const Dashboard = () => {
         return <Redirect to='/' />
     }
 
-    if (posts && userLikes && userFollows) {
-
+     if (loaded && posts) { 
         const followed = userFollows.map(follow => follow.blogId);
         const liked = userLikes.map(like => like.postId);
 
@@ -141,7 +145,7 @@ const Dashboard = () => {
                 }
             </div >
         )
-    }
+     }
     else {
         return (
             <div>

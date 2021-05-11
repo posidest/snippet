@@ -1,10 +1,10 @@
 import { csrfFetch } from './csrf';
 
 
-const GET_USER = 'users/findUser';
+const GET_USER = 'users/getUser';
 
 
-const findUser = (user) => ({
+const getUser = (user) => ({
     type: GET_USER,
     payload: user
 })
@@ -15,7 +15,7 @@ export const findAUser = (user) => async (dispatch) => {
     const res = await csrfFetch(`/api/users/${blogName}`)
     if (res.ok) {
         const data = await res.json();
-        dispatch(findUser(data.user));
+        dispatch(getUser(data));
         return res;
     }
 }
@@ -29,3 +29,4 @@ export default function userReducer(state = { user: null }, action) {
         default: return state;
     }
 }
+

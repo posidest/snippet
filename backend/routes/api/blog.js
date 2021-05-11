@@ -3,11 +3,32 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation')
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User, Blog, Follow } = require('../../db/models');
+const { User, Blog, Follow, Post } = require('../../db/models');
 const { singlePublicFileUpload, singleMulterUpload } = require('../../awsS3');
 const router = express.Router()
 const { createBlogPost } = require('../../utils/blog');
 const { restoreUser } = require('../../utils/auth')
+
+
+// populate user blog
+router.get(
+    '/:userId(\\d+)',
+    asyncHandler(async (req, res) => {
+        const id = req.params.userId;
+        // const user = await User.findAll({
+        //     where: {
+        //         blogName
+        //     }
+        // })
+        const blogPosts = await Post.findAll({
+            where: {
+                userId: id
+            },
+            include: [Like, User]
+        })
+        return res.json({ blogPosts })
+    })
+)
 
 //follow a blog
 router.post(
@@ -40,6 +61,22 @@ router.get(
         return res.json({ follows })
     })
 )
+
+//get followers for a blog
+router.get(
+    '/:id(\\d+)/followers',
+    asyncHandler(async (req, res) => {
+        const blogId = req.params.id;
+        const followers = await Follow.findAll({
+            where: {
+                blogId
+            }
+        })
+        return res.json({ followers })
+    })
+)
+
+
 
 //unfollow a blog
 router.delete(

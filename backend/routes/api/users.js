@@ -58,12 +58,12 @@ router.post(
 
 //find a user
 router.get(
-    '/:blogName(\\w{4+})',
+    '/:name(\\w{4+})',
     asyncHandler(async (req, res) => {
-        const blogName = req.params.blogName;
+        const blogName = req.params.name;
         const user = await User.findAll({
             where: {
-                blogName
+                blogName: blogName,
             }
         })
         return res.json({ user });

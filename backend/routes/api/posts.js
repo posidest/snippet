@@ -1,6 +1,6 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler');
-const { User, Blog, Post, Like } = require('../../db/models');
+const { User, Follow, Post, Like, Blog, BlogPost } = require('../../db/models');
 const { singlePublicFileUpload, singleMulterUpload } = require('../../awsS3');
 const router = express.Router()
 const { restoreUser } = require('../../utils/auth');
@@ -118,105 +118,33 @@ router.delete(
 
 
 
-// get posts
-// router.get(
-//     '/',
-//     asyncHandler(async (req, res) => {
-//         const posts = await Post.findAll({
-//             order: [['createdAt', 'DESC']],
-//             include: [Like, User, Blog],
-//         });
-//         return res.json({ posts })
-//     })
-// )
-
+// get posts from blogs a person follows
 router.get(
     '/',
+    restoreUser,
     asyncHandler(async (req, res) => {
-        const posts = await Post.findAll({
-            include: [Like, User, Blog]
-        });
-        return res.json({ posts })
-    })
-)
-
-
-
-// populate user blog
-router.get(
-    '/:userId(\\d+)',
-    asyncHandler(async (req, res) => {
-        const id = req.params.userId;
-        // const user = await User.findAll({
-        //     where: {
-        //         blogName
-        //     }
-        // })
-        const blogPosts = await Post.findAll({
+        const user = req.user;
+        const following = await Follow.findAll({
             where: {
-                userId: id
+                userId: user.id
             },
-            include: [Like, User]
+            include: Blog,
         })
-        return res.json({ blogPosts })
-    })
+
+        let postData = []
+        for (let i = 0; i < following.length; i++) {
+            let follow = following[i];
+            const posts = await Post.findAll({
+                where: {
+                    userId: follow.Blog.userId,
+                },
+                include: [Like, User, Blog],
+        });
+        postData.push(...posts)
+    }
+        return res.json({ postData })
+})
 )
-
-
-//get posts from blogs the user follows
-// router.get('/',
-//     restoreUser,
-//     asyncHandler(async (req, res) => {
-//         const user = req.user;
-//         const following = await Follow.findAll({
-//             where: {
-//                 userId: user.id
-//             },
-//             include: Blog
-//         })
-
-//         // let blogs = []
-//         // following.forEach(async (follow) => {
-//         //     let data = await Blog.findAll({
-//         //         where: {
-//         //             id: follow.B
-//         //         }
-//         //     })
-//         //     blogs.push(data);
-//         // })
-//         let posts = [];
-//         // console.log(blogs);
-//         following.forEach(async (follow) => {
-//             let post = await BlogPost.findAll({
-//                 where: {
-//                     blogId: follow.Blog.id
-//                 },
-//                 include: Post
-//             })
-//             posts.push(post.Post)
-//         })
-//         return res.json({ posts })
-//     }))
-// const posts = [];
-
-// blogs.forEach(async (blog) => {
-//     let blogPosts = await BlogPost.findAll({
-//         where: {
-//             blogId: blog.blogId
-//         },
-//         include: Post,
-//     })
-//     posts.push(blogPosts)
-//     // posts.push(blogPosts)
-// })
-// console.log('posts', posts)
-// return res.json({ posts })
-// }))
-
-
-
-
-
 
 
 module.exports = router;
