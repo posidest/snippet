@@ -3,32 +3,32 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation')
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User, Blog, Follow, Post } = require('../../db/models');
+const { User, Follow, Post, Like, BlogPost, Blog } = require('../../db/models');
 const { singlePublicFileUpload, singleMulterUpload } = require('../../awsS3');
 const router = express.Router()
-const { createBlogPost } = require('../../utils/blog');
 const { restoreUser } = require('../../utils/auth')
 
 
 // populate user blog
 router.get(
-    '/:userId(\\d+)',
+    '/:id',
     asyncHandler(async (req, res) => {
-        const id = req.params.userId;
-        // const user = await User.findAll({
-        //     where: {
-        //         blogName
-        //     }
-        // })
+        const id = req.params.id;
         const blogPosts = await Post.findAll({
             where: {
-                userId: id
+                userId: id,
             },
-            include: [Like, User]
+            include: [Like, User, Blog],
         })
-        return res.json({ blogPosts })
+        if(blogPosts) {
+            console.log(blogPosts, 'blogPosts from api')
+            return res.json({ blogPosts })
+        } else {
+            return {blogPosts, error: 'this did not work'};
+        }
     })
 )
+
 
 //follow a blog
 router.post(
@@ -49,22 +49,22 @@ router.post(
 
 //get follows for a logged in user
 router.get(
-    '/follows',
+    '/following',
     restoreUser,
     asyncHandler(async (req, res) => {
-        const user = req.user;
-        const follows = await Follow.findAll({
+        const userId = req.user.id;
+        const following = await Follow.findAll({
             where: {
-                userId: user.id
+                userId
             }
         })
-        return res.json({ follows })
+        return res.json({ following })
     })
 )
 
 //get followers for a blog
 router.get(
-    '/:id(\\d+)/followers',
+    '/:id/followers',
     asyncHandler(async (req, res) => {
         const blogId = req.params.id;
         const followers = await Follow.findAll({
@@ -76,11 +76,9 @@ router.get(
     })
 )
 
-
-
 //unfollow a blog
 router.delete(
-    '/:blogId(\\d+)/follows',
+    '/:blogId/follows',
     restoreUser,
     asyncHandler(async (req, res) => {
         const user = req.user;

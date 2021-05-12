@@ -4,7 +4,7 @@ const { User, Follow, Post, Like, Blog, BlogPost } = require('../../db/models');
 const { singlePublicFileUpload, singleMulterUpload } = require('../../awsS3');
 const router = express.Router()
 const { restoreUser } = require('../../utils/auth');
-
+const { createBlogPost } = require('../../utils/blog');
 
 
 //post an image
@@ -23,7 +23,7 @@ router.post(
             caption,
             userId
         });
-        // const blogPost = createBlogPost(userId, post);
+        await createBlogPost(post, userId);
         return res.json({ post })
     })
 )
@@ -42,6 +42,7 @@ router.post(
             caption,
             userId
         });
+        await createBlogPost(post, userId);
         return res.json({ post })
     })
 )
@@ -59,9 +60,23 @@ router.post(
             caption,
             userId
         });
+        
         return res.json({ post })
     })
 )
+
+//reblog a post 
+router.post(
+    '/reblog',
+    restoreUser,
+    asyncHandler(async (req, res) => {
+        const {type, content, caption, userId} = req.body;
+        const repost = await createBlogPost(post, req.user.id)
+        return res.json({repost})
+    })
+)
+
+
 
 //like a post
 router.post(
