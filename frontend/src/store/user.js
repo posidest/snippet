@@ -15,12 +15,13 @@ export const findAUser = (user) => async (dispatch) => {
     const res = await csrfFetch(`/api/users/${blogName}`)
     if (res.ok) {
         const data = await res.json();
+        console.log(data, 'data from findAUser thunk')
         dispatch(getUser(data));
-        return res;
+        return data;
     }
 }
 
-export default function userReducer(state = { user: null }, action) {
+export default function userReducer(state = {}, action) {
     let newState;
     switch (action.type) {
         case GET_USER:

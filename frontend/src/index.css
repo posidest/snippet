@@ -1,41 +1,48 @@
-@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bitter:wght@900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 body {
-    box-sizing: border-box;
-    background-color: #05122D;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  margin: 0;
 }
 
-
-p, h2, h3, h4 {
-    font-family: 'Roboto', sans-serif;
-    text-align: center;
+p,
+h2,
+h3,
+h4 {
+  font-family: "Roboto", sans-serif;
+  text-align: center;
 }
 
 input {
-    font-size: 12px;
-    color: black;
-    font-family: 'Roboto', sans-serif;
-    text-align: center;
+  font-size: 12px;
+  color: black;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
 }
 
 button {
-    font-size: 12px;
-    color: black;
-    font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  color: black;
+  font-family: "Roboto", sans-serif;
 }
 
 .errors {
-    font-size: 14px;
-    font-weight: bold;
-    font-family: 'Roboto', sans-serif;
-    padding: 10px;
-    margin: 100px 20px 20px 20px;;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  padding: 10px;
+  margin: 100px 20px 20px 20px;
 }
 
-
-.errors p, .errors li {
-    font-size: 14px;
-    font-weight: bold;
-    font-family: 'Roboto', sans-serif;
+.errors p,
+.errors li {
+  font-size: 14px;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
 }

@@ -4,15 +4,16 @@ import { csrfFetch } from './csrf';
 const ADD_FOLLOW = 'follows/addFollow'
 const GET_FOLLOWS = 'follows/getFollows'
 const UNFOLLOW = 'follows/removeFollow'
+const GET_FOLLOWERS = 'follows/getFollowers'
 
 const addFollow = (follow) => ({
     type: ADD_FOLLOW,
     payload: follow
 })
 
-const getFollows = (follows) => ({
+const getFollows = (following) => ({
     type: GET_FOLLOWS,
-    payload: follows
+    payload: following
 })
 
 const removeFollow = (follow) => ({
@@ -20,9 +21,15 @@ const removeFollow = (follow) => ({
     payload: follow
 })
 
+const getFollowers = (followers) => ({
+    type: GET_FOLLOWERS,
+    payload: followers
+})
+
+
 export const followBlog = (follow) => async (dispatch) => {
     const { blogId, userId } = follow;
-    const res = await csrfFetch('/api/blog/follows', {
+    const res = await csrfFetch(`/api/blog/follows`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -38,14 +45,24 @@ export const followBlog = (follow) => async (dispatch) => {
 
 
 export const showFollows = () => async (dispatch) => {
-    // const { userId } = user;
-    const res = await csrfFetch(`/api/blog/follows`);
+    const res = await csrfFetch(`/api/blog/following`);
     if (res.ok) {
         const data = await res.json();
-        dispatch(getFollows(data.follows))
-        return res;
+        dispatch(getFollows(data))
+        return data;
     }
 }
+
+
+// export const showFollowers = (blogId) => async (dispatch) => {
+//     const res = await csrfFetch(`/api/${blogId}/followers`);
+//     if (res.ok) {
+//         const data = await res.json()
+//         dispatch(getFollowers(data));
+//         return res;
+//     }
+// }
+
 
 
 export const unFollowBlog = (follow) => async (dispatch) => {
@@ -61,14 +78,17 @@ export const unFollowBlog = (follow) => async (dispatch) => {
 }
 
 
-export default function followReducer(state = { follows: [] }, action) {
+export default function followReducer(state = {}, action) {
     let newState;
     switch (action.type) {
         case ADD_FOLLOW:
             newState = { ...state, follows: [...state.follows, action.payload] }
             return newState;
         case GET_FOLLOWS:
-            newState = { ...state, follows: [...state.follows], userFollows: action.payload }
+            newState = { ...state,  ...action.payload }
+            return newState;
+        case GET_FOLLOWERS: 
+            newState = {...state, ...action.payload}
             return newState;
         // case UNFOLLOW:
         //     // const updatedUserFollows = state.userFollows.filter((follow) => follow !== action.payload)

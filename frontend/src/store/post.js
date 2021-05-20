@@ -42,9 +42,16 @@ export const populateBlog = (blog) => async (dispatch) => {
         const data = await res.json();
         console.log(data)
         dispatch(getBlogPosts(data));
-        return res;
+        return data;
     }
 }
+
+
+// export const reBlog = (post) => async (dispatch) => {
+//     const { type, content, caption, userId } = post;
+
+// }
+
 
 
 export const postImage = (post) => async (dispatch) => {
@@ -108,17 +115,20 @@ export const postLink = (post) => async (dispatch) => {
 }
 
 
+
+
+
 export default function postReducer(state = {}, action) {
     let newState;
     switch (action.type) {
         case POST_MEDIA:
-            newState = { ...state, post: action.payload }
+            newState = { ...state, ...action.payload }
             return newState;
         case GET_POSTS:
-            newState = { ...state, postData: action.payload }
+            newState = { ...state, ...action.payload }
             return newState;
         case GET_BLOG_POSTS:
-            newState = { ...state, blogPosts: action.payload }
+            newState = { ...state, ...action.payload }
             return newState;
         default: return state;
     }

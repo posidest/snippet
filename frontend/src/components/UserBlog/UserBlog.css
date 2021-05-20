@@ -1,0 +1,93 @@
+.blog {
+  background-color: rgba(150, 150, 150, 0.05);
+  color: black;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 60px 20px 20px 20px;
+}
+
+.post {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: fit-content;
+  background-color: white;
+  width: fit-content;
+  border: 0.5px solid rgba(150, 150, 150, 0.2);
+  box-shadow: 1px 1px 1px rgba(150, 150, 150, 0.3);
+}
+
+.post p {
+  font-size: smaller;
+  font-weight: lighter;
+}
+
+.owner-info img {
+  height: 100px;
+  width: 100px;
+}
+
+.owner-info {
+  margin-top: 20px;
+  padding: 0 5px 5px 5px;
+}
+
+.owner-info h3 {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.image-post {
+  width: fit-content;
+  height: fit-content;
+  padding: 20px;
+}
+
+.word-post,
+.link-post {
+  max-width: 300px;
+  max-height: 300px;
+  padding: 20px;
+}
+
+.link-post a {
+  color: deepskyblue;
+}
+
+.caption-div p {
+  color: rgba(0, 0, 0, 0.8);
+  margin-bottom: 40px;
+}
+
+.caption-div {
+  width: 200px;
+}
+
+.post-foot {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  /* align-items: center; */
+  padding: 0 20px 0 20px;
+  position: relative;
+  /* justify-content: baseline; */
+}
+
+.post-foot i {
+  color: rgba(0, 0, 0, 0.5);
+  padding: 0 10px 0 0px;
+}
+
+.date {
+  position: absolute;
+  right: 20px;
+  font-size: smaller;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.underline {
+  border-bottom: 1px solid rgba(200, 200, 200, 0.6);
+}

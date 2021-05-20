@@ -6,15 +6,20 @@ import ProfileButton from '../Menus/ProfileButton';
 import PostButton from '../Menus/PostButton';
 import './Navigation.css'
 
-const Navigation = ({ isLoaded }) => {
+const Navigation = ({ isLoaded, isBlog, setIsBlog }) => {
     const sessionUser = useSelector(state => state.session.user);
+    let blogStyles = {
+        border: '1px solid rgba(0, 0, 0, 0.3)'
+    }
 
     let sessionLinks;
     if (sessionUser) {
         sessionLinks = (
             <>
                 <div>
-                    <NavLink exact to='/dashboard'><i className="fas fa-cut fa-2x" /></NavLink>
+                    <NavLink exact to='/dashboard'>
+                        <i className="fas fa-cut fa-2x" style={isBlog ? {blogStyles} : null}/>
+                    </NavLink>
                 </div>
                 <div className='user-btns'>
                     <ProfileButton user={sessionUser} />

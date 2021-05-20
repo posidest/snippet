@@ -15,13 +15,15 @@ import UserBlog from './components/UserBlog';
 const App = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isBlog, setIsBlog] = useState(false);
+
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      <Navigation isLoaded={isLoaded} isBlog={isBlog} setIsBlog={setIsBlog}/>
       {isLoaded && (
         <Switch>
           <Route exact path='/'>
@@ -46,7 +48,7 @@ const App = () => {
             <LinkForm />
           </Route>
           <Route path='/:blogName'>
-            <UserBlog />
+            <UserBlog setIsBlog={setIsBlog} isBlog={isBlog}/>
           </Route>
           {/* <Route path='/:blogName'>
             <UserBlog />
