@@ -60,7 +60,7 @@ router.post(
             caption,
             userId
         });
-        
+        await createBlogPost(post, userId);
         return res.json({ post })
     })
 )
@@ -110,26 +110,6 @@ router.get(
 )
 
 
-//unlike a post
-router.delete(
-    '/:postId(\\d+)/likes',
-    restoreUser,
-    asyncHandler(async (req, res) => {
-        const user = req.user;
-        const { postId, userId } = req.body;
-        const id = req.params.postId;
-        if (user.id === userId && postId === id) {
-            const like = await Like.findAll({
-                where: {
-                    userId,
-                    postId
-                }
-            })
-            await like.destroy();
-            return res.json()
-        }
-    })
-)
 
 
 
@@ -154,12 +134,33 @@ router.get(
                     userId: follow.Blog.userId,
                 },
                 include: [Like, User, Blog],
-        });
-        postData.push(...posts)
-    }
+            });
+            postData.push(...posts)
+        }
         return res.json({ postData })
-})
-)
-
-
+    })
+    )
+    
+    
+    //unlike a post
+    router.delete(
+        '/:postId(\\d+)/likes',
+        restoreUser,
+        asyncHandler(async (req, res) => {
+            const user = req.user;
+            const { postId, userId } = req.body;
+            const id = req.params.postId;
+            if (user.id === userId && postId === id) {
+                const like = await Like.findAll({
+                    where: {
+                        userId,
+                        postId
+                    }
+                })
+                await like.destroy();
+                return res.json()
+            }
+        })
+    )
+    
 module.exports = router;
