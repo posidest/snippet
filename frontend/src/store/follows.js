@@ -48,20 +48,10 @@ export const showFollows = () => async (dispatch) => {
     const res = await csrfFetch(`/api/blog/following`);
     if (res.ok) {
         const data = await res.json();
-        dispatch(getFollows(data))
+        dispatch(getFollows(data.following))
         return data;
     }
 }
-
-
-// export const showFollowers = (blogId) => async (dispatch) => {
-//     const res = await csrfFetch(`/api/${blogId}/followers`);
-//     if (res.ok) {
-//         const data = await res.json()
-//         dispatch(getFollowers(data));
-//         return res;
-//     }
-// }
 
 
 
@@ -81,21 +71,22 @@ export const unFollowBlog = (follow) => async (dispatch) => {
 export default function followReducer(state = {}, action) {
     let newState;
     switch (action.type) {
-        case ADD_FOLLOW:
-            newState = { ...state, follows: [...state.follows, action.payload] }
-            return newState;
         case GET_FOLLOWS:
-            newState = { ...state,  ...action.payload }
+            newState = { ...state,  ['following']: action.payload }
+            return newState;
+        case ADD_FOLLOW:
+            newState = { ...state}
+            newState['following'] = [...state.following, action.payload];
             return newState;
         case GET_FOLLOWERS: 
             newState = {...state, ...action.payload}
             return newState;
-        // case UNFOLLOW:
-        //     // const updatedUserFollows = state.userFollows.filter((follow) => follow !== action.payload)
-        //     const updatedUserFollows = state.userFollows.slice(0, action.payload).concat(state.userFollows.slice(action.payload))
-        //     const updatedFollows = state.follows.filter((follow) => follow !== action.payload)
-        //     newState = { ...state, follows: updatedFollows, userFollows: updatedUserFollows }
-        //     return newState;
+        case UNFOLLOW:
+            const updatedUserFollows = state.userFollows.filter((follow) => follow !== action.payload)
+            // const updatedUserFollows = state.userFollows.slice(0, action.payload).concat(state.userFollows.slice(action.payload))
+            const updatedFollows = state.follows.filter((follow) => follow !== action.payload)
+            newState = { ...state, following: [...updatedFollows, ...updatedUserFollows]}
+            return newState;
         default: return state;
     }
 }

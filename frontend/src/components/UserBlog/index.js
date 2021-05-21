@@ -25,7 +25,6 @@ const UserBlog = ({isBlog, setIsBlog}) => {
         return res;
     }
 
-
     const sessionUser = useSelector((state) => state.session.user);
     let user = useSelector((state) => state.user.user);
     if(user) user = user['user']
