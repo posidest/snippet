@@ -21,9 +21,10 @@ router.post(
             type,
             content,
             caption,
-            userId
+            userId,
+            ownerId: userId,
         });
-        await createBlogPost(post, userId);
+        // await createBlogPost(userId, post);
         return res.json({ post })
     })
 )
@@ -40,9 +41,10 @@ router.post(
             type,
             content,
             caption,
-            userId
+            userId,
+            ownerId: userId,
         });
-        await createBlogPost(post, userId);
+        // await createBlogPost(userId, post);
         return res.json({ post })
     })
 )
@@ -58,23 +60,14 @@ router.post(
             type,
             content,
             caption,
-            userId
+            userId,
+            ownerId: userId,
         });
-        await createBlogPost(post, userId);
+        // await createBlogPost(userId, post);
         return res.json({ post })
     })
 )
 
-//reblog a post 
-router.post(
-    '/reblog',
-    restoreUser,
-    asyncHandler(async (req, res) => {
-        const {type, content, caption, userId} = req.body;
-        const repost = await createBlogPost(post, req.user.id)
-        return res.json({repost})
-    })
-)
 
 
 
@@ -107,8 +100,17 @@ router.get(
         })
         return res.json({ likes })
     })
-)
+    )
 
+    // router.get(
+//     '/',
+//     restoreUser,
+//     asyncHandler(async (req, res) => {
+    //         const postData= await Post.findAll({
+//             include: [Like, User, Blog],
+//         });
+//         return res.json({postData})
+//     }))
 
 
 
@@ -125,26 +127,62 @@ router.get(
             },
             include: Blog,
         })
-
+        
         let postData = []
         for (let i = 0; i < following.length; i++) {
             let follow = following[i];
             const posts = await Post.findAll({
+                order: [['createdAt', 'DESC']],
                 where: {
                     userId: follow.Blog.userId,
-                },
-                include: [Like, User, Blog],
-            });
+                    // $or: [{
+                        //     ownerId: follow.Blog.userId,
+                        // }],
+                    },
+                    include: [Like, User, Blog],
+                });
             postData.push(...posts)
         }
+        // console.log(postData, 'post data from api route')
         return res.json({ postData })
     })
     )
     
+    //reblog a post 
+    router.post(
+        '/reblog',
+        restoreUser,
+        asyncHandler(async (req, res) => {
+            let { type, content, caption, ownerId } = req.body;
+            const userId = req.user.id;
+            if (ownerId === null) ownerId = userId;
+            const post = await Post.create({
+                type,
+                content,
+                caption,
+                userId,
+                ownerId,
+            })
+            // await createBlogPost(userId, post)
+            return res.json({post})
+        })
+    )
     
+
+    //get post by id
+    router.get(
+        '/:postId',
+        asyncHandler(async(req, res) => {
+            const id = req.params.postId;
+            const post = await Post.findByPk(id);
+            return res.json({post})
+        })
+    )
+
+
     //unlike a post
     router.delete(
-        '/:postId(\\d+)/likes',
+        '/:postId/likes',
         restoreUser,
         asyncHandler(async (req, res) => {
             const user = req.user;
@@ -161,6 +199,8 @@ router.get(
                 return res.json()
             }
         })
-    )
-    
-module.exports = router;
+        )
+        
+
+
+        module.exports = router;

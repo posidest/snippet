@@ -4,11 +4,12 @@ module.exports = (sequelize, DataTypes) => {
     type: DataTypes.ENUM('text', 'link', 'image'),
     content: DataTypes.TEXT,
     caption: DataTypes.TEXT,
-    userId: DataTypes.INTEGER
+    userId: DataTypes.INTEGER,
+    ownerId: DataTypes.INTEGER,
   }, {});
   Post.associate = function (models) {
     Post.belongsTo(models.User, { foreignKey: 'userId' })
-
+    Post.belongsTo(models.User, {as: 'Owner', foreignKey: 'ownerId'})
     const columnMappingBlogPosts = {
       through: 'BlogPosts',
       otherKey: 'blogId',
