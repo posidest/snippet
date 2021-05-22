@@ -1,11 +1,15 @@
 import { csrfFetch } from './csrf';
 
 
-const POST_MEDIA = 'post/createPost'
+const POST_MEDIA = 'posts/createPost'
 
-const GET_POSTS = 'post/displayPosts'
+const GET_POSTS = 'posts/displayPosts'
 
-const GET_BLOG_POSTS = 'post/showBlog'
+const GET_BLOG_POSTS = 'posts/getBlogPosts'
+
+const REBLOG  = 'posts/reblog'
+
+const GET_POST = 'post/getPost'
 
 
 const displayPosts = (posts) => ({
@@ -18,9 +22,19 @@ const createPost = (post) => ({
     payload: post
 });
 
-const showBlog = (blogPosts) => ({
+const getBlogPosts = (blogPosts) => ({
     type: GET_BLOG_POSTS,
     payload: blogPosts
+})
+
+const reblog = (post) => ({
+    type: REBLOG,
+    payload: post  
+})
+
+const getPost = (post) => ({
+    type: GET_POST,
+    payload: post
 })
 
 
@@ -29,7 +43,7 @@ export const showPosts = () => async (dispatch) => {
     if (res.ok) {
         const data = await res.json();
         console.log('data from thunk', data)
-        dispatch(displayPosts(data.posts));
+        dispatch(displayPosts(data));
         return res;
     }
 }
@@ -37,14 +51,25 @@ export const showPosts = () => async (dispatch) => {
 
 export const populateBlog = (blog) => async (dispatch) => {
     const { userId } = blog;
-    const res = await csrfFetch(`/api/posts/${userId}`)
+    const res = await csrfFetch(`/api/blog/${userId}`)
     if (res.ok) {
         const data = await res.json();
         console.log(data)
-        dispatch(showBlog(data.blogPosts));
-        return res;
+        dispatch(getBlogPosts(data));
+        return data;
     }
 }
+
+export const showPost = (postId) => async(dispatch) => {
+    const res = await csrfFetch(`/api/posts/${postId}`)
+    if (res.ok) {
+        const data = await res.json()
+        console.log(data, 'data from showPost thunk')
+        dispatch(getPost(data))
+        return data
+    }
+}
+
 
 
 export const postImage = (post) => async (dispatch) => {
@@ -108,17 +133,38 @@ export const postLink = (post) => async (dispatch) => {
 }
 
 
-export default function postReducer(state = { post: null }, action) {
+export const reblogPost = (post) => async (dispatch) => {
+    const {type, content, caption, ownerId} = post;
+        const res = await csrfFetch(`/api/posts/reblog`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({type, content, caption, ownerId}),
+    });
+    if (res.ok) {
+        const data = await res.json();
+        console.log('data from reblog thunk', data)
+        dispatch(createPost(data))
+        return res;
+    }
+}
+
+
+export default function postReducer(state = {}, action) {
     let newState;
     switch (action.type) {
         case POST_MEDIA:
-            newState = { ...state, post: action.payload }
+            newState = { ...state, ...action.payload }
             return newState;
         case GET_POSTS:
-            newState = { ...state, posts: action.payload }
+            newState = { ...state, ...action.payload }
             return newState;
         case GET_BLOG_POSTS:
-            newState = { ...state, posts: [...state.posts], blogPosts: action.payload }
+            newState = { ...state, ...action.payload }
+            return newState;
+        case GET_POST:
+            newState = {...state, ...action.payload}
             return newState;
         default: return state;
     }

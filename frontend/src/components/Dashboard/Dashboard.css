@@ -1,122 +1,128 @@
 .dash {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    width: 700px;
-    margin: 0 auto;
-} 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 700px;
+  margin: 0 auto;
+  /* margin-top: 50px; */
+  /* background-color: #05122d; */
+}
+
+.dash-page {
+  background-color: #05122d;
+  margin: 0;
+}
 
 .avatar {
-   border-radius: 3px;
-    width: 60px;
-    height: 60px;
-    position: absolute;
-    right: 620px;
-    top: 10px;
+  border-radius: 3px;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  right: 620px;
+  top: 10px;
 }
 
 .link {
-    padding: 20px;
+  padding: 20px;
 }
 
 .content-div {
-    width: 500px;
-    padding: 10px 0 20px 0;
-    background-color: white;
-    margin: 10px;
-    border-radius: 3px;
-    position: relative;
+  width: 500px;
+  padding: 10px 0 20px 0;
+  background-color: white;
+  margin: 10px;
+  border-radius: 3px;
+  position: relative;
 }
 
 .content-div img {
-    width: 500px;
+  width: 500px;
 }
 
 .content-div p {
-    color: black;
-    font-size: 11px;
-    padding: 10px;
+  color: black;
+  font-size: 11px;
+  padding: 10px;
 }
 
 .content-div i {
-    color: gray;
+  color: gray;
 }
 
 .dash-btns {
-    padding: 10px;
+  padding: 10px;
 }
 
 .dash-btns i {
-position: absolute;
-bottom: 12px;
-cursor: pointer;
+  position: absolute;
+  bottom: 12px;
+  cursor: pointer;
 }
 
 .fa-heart {
-    right: 10px;
+  right: 10px;
 }
 
 .fa-heart:hover {
-    color: red;
+  color: red;
 }
 
 .fa-sync-alt {
-    right: 40px;
-} 
+  right: 40px;
+}
 
 .likes {
-    position: absolute;
-    left: 15px;
-    bottom: 12px;
-    color: gray;
+  position: absolute;
+  left: 15px;
+  bottom: 12px;
+  color: gray;
 }
 
 .blog-info {
-    display: flex;
-    align-items:center;
-    justify-content: flex-start;
-    height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 30px;
 }
 
 .blog-info a {
-    color: black;
-    font-size: 11px;
-    margin-left: 20px;
+  color: black;
+  font-size: 11px;
+  margin-left: 20px;
 }
 
 .underline {
-    border-bottom: 1px solid rgba(200,200,200,0.6);
+  border-bottom: 1px solid rgba(200, 200, 200, 0.6);
 }
 
 .post-buttons {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-
 .post-buttons p {
-    color: black;
-    font-weight: lighter;
+  color: black;
+  font-weight: lighter;
 }
 
 .post-div {
-    width: 500px;
-    height: 30px;
-    padding: 25px 0 25px 0;
-    background-color: white;
-    margin: 70px 10px 10px 10px;
-    border-radius: 3px;
+  width: 500px;
+  height: 30px;
+  padding: 25px 0 25px 0;
+  background-color: white;
+  margin: 70px 10px 10px 10px;
+  border-radius: 3px;
 }
 
 .user-avatar {
-    border-radius: 3px;
-    width: 60px;
-    height: 60px;
-    position: absolute;
-    right: 620px;
-    top: 70px;
+  border-radius: 3px;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  right: 620px;
+  top: 70px;
 }

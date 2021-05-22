@@ -1,10 +1,10 @@
 import { csrfFetch } from './csrf';
 
 
-const GET_USER = 'users/findUser';
+const GET_USER = 'users/getUser';
 
 
-const findUser = (user) => ({
+const getUser = (user) => ({
     type: GET_USER,
     payload: user
 })
@@ -15,12 +15,13 @@ export const findAUser = (user) => async (dispatch) => {
     const res = await csrfFetch(`/api/users/${blogName}`)
     if (res.ok) {
         const data = await res.json();
-        dispatch(findUser(data.user));
-        return res;
+        console.log(data, 'data from findAUser thunk')
+        dispatch(getUser(data));
+        return data;
     }
 }
 
-export default function userReducer(state = { user: null }, action) {
+export default function userReducer(state = {}, action) {
     let newState;
     switch (action.type) {
         case GET_USER:
@@ -29,3 +30,4 @@ export default function userReducer(state = { user: null }, action) {
         default: return state;
     }
 }
+

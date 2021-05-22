@@ -31,11 +31,9 @@ export const likeAPost = (like) => async (dispatch) => {
     });
     if (res.ok) {
         const data = await res.json();
-        console.log({ data, event: likePost(data.like) }, 'from likeAPost')
         dispatch(likePost(data.like));
         return res;
     }
-
 }
 
 export const unLikePost = (like) => async (dispatch) => {
@@ -69,11 +67,11 @@ export default function likeReducer(state = { likes: [] }, action) {
         case SHOW_LIKES:
             newState = { ...state, likes: [...state.likes], userLikes: action.payload }
             return newState;
-        // case UNLIKE:
-        //     const updatedUserLikes = state.userLikes.filter((like) => like !== action.payload)
-        //     const updatedLikes = state.likes.filter((like) => like !== action.payload)
-        //     newState = { ...state, likes: updatedLikes, userLikes: updatedUserLikes }
-        //     return newState;
+        case UNLIKE:
+            const updatedUserLikes = state.userLikes.filter((like) => like !== action.payload)
+            const updatedLikes = state.likes.filter((like) => like !== action.payload)
+            newState = { ...state, likes: updatedLikes, userLikes: updatedUserLikes }
+            return newState;
         default: return state;
     }
 }

@@ -56,17 +56,21 @@ router.post(
     }),
 );
 
-//find a user
+//find a user by blogname
 router.get(
-    '/:blogName(\\w{4+})',
+    '/:name(*)',
     asyncHandler(async (req, res) => {
-        const blogName = req.params.blogName;
-        const user = await User.findAll({
+        const blogName = req.params.name;
+        const user = await User.findOne({
             where: {
-                blogName
+                blogName,
             }
         })
-        return res.json({ user });
+        if (user) {
+            return res.json({ user });
+        } else {
+            return{  error:"User not found"}
+        }
     }))
 
 
