@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect, NavLink } from 'react-router-dom';
+import { Redirect, NavLink, useHistory } from 'react-router-dom';
 import palette from '../../images/palette.jpg'
 import './Dashboard.css';
 import { reblogPost } from '../../store/post'
@@ -12,9 +12,10 @@ import { followBlog, showFollows, unFollowBlog } from '../../store/follows'
       const [love, setLove] = useState(false)
        const dispatch = useDispatch();
        const sessionUser = useSelector((state) => state.session.user);
+      const history = useHistory()
 
       const reblog = (e) => {
-         dispatch(reblogPost(post))
+         history.push(`/${post.id}/reblog`)
       }
       
       const follow = (e) => {

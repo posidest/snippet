@@ -8,9 +8,11 @@ import LandingPage from './components/LandingPage';
 import ImageForm from './components/PostForm/ImageForm';
 import WordsForm from './components/PostForm/WordsForm';
 import LinkForm from './components/PostForm/LinkForm'
+import ReblogForm from './components/PostForm/ReblogForm'
 import Dashboard from './components/Dashboard';
 import CreateUser from './components/CreateUser'
 import UserBlog from './components/UserBlog';
+
 
 const App = () => {
   const dispatch = useDispatch();
@@ -29,25 +31,28 @@ const App = () => {
           <Route exact path='/'>
             <LandingPage />
           </Route>
-          <Route path='/login'>
+          <Route exact path='/login'>
             <LoginFormPage />
           </Route>
-          <Route path='/signup'>
+          <Route exact path='/signup'>
             <CreateUser />
           </Route>
-          <Route path='/dashboard'>
+          <Route exact path='/dashboard'>
             <Dashboard />
           </Route>
-          <Route path='/new/image'>
+          <Route exact path='/new/image'>
             <ImageForm />
           </Route>
-          <Route path='/new/words'>
+          <Route exact path='/new/words'>
             <WordsForm />
           </Route>
-          <Route path='/new/link'>
+          <Route exact path='/new/link'>
             <LinkForm />
           </Route>
-          <Route path='/:blogName'>
+          <Route exact path='/:postId/reblog'>
+            <ReblogForm />
+          </Route>
+          <Route exact path='/:blogName'>
             <UserBlog setIsBlog={setIsBlog} isBlog={isBlog}/>
           </Route>
           {/* <Route path='/:blogName'>

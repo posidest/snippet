@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { populateBlog } from '../../store/post'
 import { findAUser } from '../../store/user'
@@ -73,7 +73,9 @@ const UserBlog = ({isBlog, setIsBlog}) => {
                         <div className='underline'>            
                         </div>
                         <div className='post-foot'>
-                            <i className='fas fa-sync-alt' />
+                            <Link to={`/${post.id}/reblog`}>
+                                <i className='fas fa-sync-alt' />
+                            </Link>
                             <i className='fas fa-heart' />
                             <span className='date'>{parseDate(post.createdAt)}</span>
                         </div>

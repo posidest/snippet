@@ -9,6 +9,9 @@ const GET_BLOG_POSTS = 'posts/getBlogPosts'
 
 const REBLOG  = 'posts/reblog'
 
+const GET_POST = 'post/getPost'
+
+
 const displayPosts = (posts) => ({
     type: GET_POSTS,
     payload: posts
@@ -27,6 +30,11 @@ const getBlogPosts = (blogPosts) => ({
 const reblog = (post) => ({
     type: REBLOG,
     payload: post  
+})
+
+const getPost = (post) => ({
+    type: GET_POST,
+    payload: post
 })
 
 
@@ -52,11 +60,15 @@ export const populateBlog = (blog) => async (dispatch) => {
     }
 }
 
-
-// export const reBlog = (post) => async (dispatch) => {
-//     const { type, content, caption, userId } = post;
-
-// }
+export const showPost = (postId) => async(dispatch) => {
+    const res = await csrfFetch(`/api/posts/${postId}`)
+    if (res.ok) {
+        const data = await res.json()
+        console.log(data, 'data from showPost thunk')
+        dispatch(getPost(data))
+        return data
+    }
+}
 
 
 
@@ -122,18 +134,18 @@ export const postLink = (post) => async (dispatch) => {
 
 
 export const reblogPost = (post) => async (dispatch) => {
-    const { type, content, caption, userId} = post;
-        const res = await csrfFetch('/api/posts/reblog', {
+    const {type, content, caption, ownerId} = post;
+        const res = await csrfFetch(`/api/posts/reblog`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(post),
+        body: JSON.stringify({type, content, caption, ownerId}),
     });
     if (res.ok) {
         const data = await res.json();
         console.log('data from reblog thunk', data)
-        dispatch(createPost(data.post))
+        dispatch(createPost(data))
         return res;
     }
 }
@@ -150,6 +162,9 @@ export default function postReducer(state = {}, action) {
             return newState;
         case GET_BLOG_POSTS:
             newState = { ...state, ...action.payload }
+            return newState;
+        case GET_POST:
+            newState = {...state, ...action.payload}
             return newState;
         default: return state;
     }
