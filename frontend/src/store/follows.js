@@ -54,7 +54,6 @@ export const showFollows = () => async (dispatch) => {
 }
 
 
-
 export const unFollowBlog = (follow) => async (dispatch) => {
     const { blogId, userId } = follow;
     const res = await csrfFetch(`/api/blog/${blogId}/follows`, {

@@ -41,7 +41,10 @@ const ReblogForm = () => {
             <div key={post.id}>
                {post.type === 'image' && (
                   <div className='image-post'>
-                     <img src={post.content} alt='image' style={{maxWidth: '400px', maxHeight: '400px'}}/>
+                     <img 
+                     src={post.content} 
+                     alt='image' 
+                     style={{maxWidth: '400px', maxHeight: '400px'}}/>
                </div>
                )}
                {post.type === 'words' && (
@@ -52,11 +55,11 @@ const ReblogForm = () => {
                   <div className='link-post'>
                      <a href={post.content}>{post.content}</a>
                </div>)}
-               <div className='caption-div'>
-                     <p>
-                        {post.caption}
-                     </p>
-               </div>
+               {/* <div className='caption-div'> */}
+               <p style={{color: 'black', marginBottom: '40px'}}>
+               {post.caption}
+               </p>
+               {/* </div> */}
                <div className='underline'>            
                </div>
             </div>

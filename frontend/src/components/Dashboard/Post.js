@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect, NavLink, useHistory } from 'react-router-dom';
+import { Redirect, NavLink, useHistory, Link } from 'react-router-dom';
 import palette from '../../images/palette.jpg'
 import './Dashboard.css';
 import { reblogPost } from '../../store/post'
+import {findAUser} from '../../store/user'
 import { likeAPost, showLikes, unLikePost } from '../../store/likes'
 import { followBlog, showFollows, unFollowBlog } from '../../store/follows'
 
@@ -11,27 +12,39 @@ import { followBlog, showFollows, unFollowBlog } from '../../store/follows'
       const [following, setFollowing] = useState(false)
       const [love, setLove] = useState(false)
        const dispatch = useDispatch();
-       const sessionUser = useSelector((state) => state.session.user);
+       const sessionUser = useSelector((state) => state.session.user)
+      const blogId = post.User.Blog.id;
       const history = useHistory()
 
       const reblog = (e) => {
          history.push(`/${post.id}/reblog`)
       }
       
+      useEffect(() => {
+            if (followed.includes(blogId)) {
+               setFollowing(true)
+            } else {
+               setFollowing(false)
+            }
+         
+      },[followed])
+
+
       const follow = (e) => {
-         !followed.includes(post.Blogs[0].id) ?
+         // !following ?
+         !followed.includes(blogId) ?
          dispatch(followBlog({
             userId: sessionUser.id,
-            blogId: post.Blogs[0].id
+            blogId: blogId
          })).then(() => {
-             followed.push(post.Blogs[0].id) 
+             followed.push(blogId) 
              setFollowing(true)
          }) :
          dispatch(unFollowBlog({
             userId: sessionUser.id,
-            blogId: post.Blogs[0].id
+            blogId: blogId,
          })).then(() => {
-             followed = followed.filter((follow) => follow !== post.Blogs[0].id)
+             followed = followed.filter((follow) => follow !== blogId)
              setFollowing(false)
          })
       }
@@ -65,6 +78,10 @@ import { followBlog, showFollows, unFollowBlog } from '../../store/follows'
                      <a href={`/${post.User.blogName}`}>
                            {post.User.blogName}
                      </a>
+                     <i className = 'fas fa-sync-alt' style={{paddingLeft: '20px'}}/>
+                     <a href={`/${post.Owner.blogName}`}>
+                        {post.Owner.blogName}
+                     </a>
                      <p className='follow'
                         style={following ?
                            {color: 'gray', fontWeight: 'bold', cursor: 'pointer', fontSize: '11px' } :
@@ -73,7 +90,7 @@ import { followBlog, showFollows, unFollowBlog } from '../../store/follows'
                            fontSize: '11px',
                            cursor: 'pointer'
                            }}
-                        value={post.Blogs.id}
+                        value={blogId}
                         onClick={follow}
                      >Follow</p>
                   </div>
@@ -93,8 +110,11 @@ import { followBlog, showFollows, unFollowBlog } from '../../store/follows'
                            {post.content}
                         </a>
                      </div>
-                     )}
-                  <p>{post.caption}</p>
+                  )}
+                  <Link to={`/${post.Owner.blogName}`} style={{color: 'deepskyblue'}}>
+                     {post.Owner.blogName}:
+                  </Link>
+                  <span style={{paddingLeft: '5px'}}>{post.caption}</span>
                   <div className='underline'>
                   </div>
                   <div className='dash-btns'>
