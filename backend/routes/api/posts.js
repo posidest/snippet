@@ -69,8 +69,6 @@ router.post(
 )
 
 
-
-
 //like a post
 router.post(
     `/likes`,
@@ -135,25 +133,37 @@ router.get(
                 order: [['createdAt', 'DESC']],
                 where: {
                     userId: follow.Blog.userId,
-                    $or: [{
-                            userId: user.id,
-                        }],
                     },
-                    // include: [Like, User, Blog],
                     include: [{
                         model: User,
                         as: 'Owner'
                      },
                     {model: Like},
-                    {model: Blog},
-                    {model: User}]
+                    {model: User,
+                    include:[Blog]}]
                 });
             postData.push(...posts)
         }
+
+        let userPosts = await Post.findAll({
+            order: [['createdAt', 'DESC']],
+            where: {
+                userId: user.id,
+                },
+                include: [{
+                    model: User,
+                    as: 'Owner'
+                },
+                {model: Like},
+                {model: User,
+                include: [Blog]}]
+            });
+            postData.push(...userPosts)
         return res.json({ postData })
         })
     )
     
+
     //reblog a post 
     router.post(
         '/reblog',

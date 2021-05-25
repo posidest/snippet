@@ -64,12 +64,13 @@ router.get(
         const user = await User.findOne({
             where: {
                 blogName,
-            }
+            },
+            include: [Blog],
         })
         if (user) {
             return res.json({ user });
         } else {
-            return{  error:"User not found"}
+            return {error:"User not found"}
         }
     }))
 

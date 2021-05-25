@@ -48,14 +48,28 @@ router.post(
         '/:id',
         asyncHandler(async (req, res) => {
             const id = req.params.id;
-            const blogPosts = await Post.findAll({
+            // const blogPosts = await Post.findAll({
+            //     order: [['createdAt', 'DESC']],
+            //     where: {
+            //         userId: id,
+            //     },
+            //     include: [Like, User, Blog],
+
+            // })
+
+            let blogPosts = await Post.findAll({
                 order: [['createdAt', 'DESC']],
                 where: {
                     userId: id,
-                },
-                include: [Like, User, Blog],
-
-            })
+                    },
+                    include: [{
+                        model: User,
+                        as: 'Owner'
+                    },
+                    {model: Like},
+                    {model: User,
+                    include: [Blog]}]
+                });
             if(blogPosts) {
                 return res.json({ blogPosts })
             } else {

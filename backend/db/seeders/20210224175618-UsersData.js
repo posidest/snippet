@@ -11,6 +11,7 @@ module.exports = {
         email: 'demo@user.io',
         blogName: 'Demo-lition',
         hashedPassword: bcrypt.hashSync('password'),
+        avatar: 'https://snippetbucket.s3.amazonaws.com/b18.jpg',
       },
       {
         email: faker.internet.email(),
