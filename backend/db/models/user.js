@@ -51,21 +51,9 @@ module.exports = (sequelize, DataTypes) => {
     });
   User.associate = function (models) {
     User.hasOne(models.Blog, { foreignKey: 'userId' });
-
-    // const columnMappingFollows = {
-    //   through: 'Follows',
-    //   otherKey: 'blogId',
-    //   foreignKey: 'userId'
-    // };
-    // User.belongsToMany(models.Blog, columnMappingFollows)
+    User.hasMany(models.Post, {foreignKey: 'userId'});
+    User.hasMany(models.Post, {as: 'Owner', foreignKey: 'ownerId'});
     User.hasMany(models.Follow, { foreignKey: 'userId' })
-    // const columnMappingLikes = {
-    //   through: 'Likes',
-    //   otherKey: 'postId',
-    //   foreignKey: 'userId'
-    // };
-    // User.belongsToMany(models.Post, columnMappingLikes)
-
     User.hasMany(models.Like, { foreignKey: 'userId' })
   };
 
