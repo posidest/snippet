@@ -2,11 +2,13 @@ const express = require('express')
 const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation')
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
 const { User, Blog } = require('../../db/models');
 const { createBlog } = require('../../utils/blog')
 const { singleMulterUpload, singlePublicFileUpload } = require('../../awsS3')
 const router = express.Router();
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 const validateSignup = [
     check('email')
@@ -56,24 +58,47 @@ router.post(
     }),
 );
 
-//find a user by blogname
-router.get(
-    '/:name(*)',
-    asyncHandler(async (req, res) => {
-        const blogName = req.params.name;
-        const user = await User.findOne({
-            where: {
-                blogName,
-            },
-            include: [Blog],
-        })
-        if (user) {
-            return res.json({ user });
-        } else {
-            return {error:"User not found"}
-        }
-    }))
 
+
+//get users
+router.get(
+    '/',
+    restoreUser,
+    asyncHandler(async (req, res) => {
+        const user = req.user;
+        const users = await User.findAll(
+            {
+            where: {
+                id: {
+                    [Op.ne]: user.id
+                },
+            },
+            limit: 5,
+            include: [Blog],
+        }
+        )
+        console.log(users, 'users from api')
+        return res.json({ users })
+    })
+    )
+    
+    //find a user by blogname
+    router.get(
+        '/:name(*)',
+        asyncHandler(async (req, res) => {
+            const blogName = req.params.name;
+            const user = await User.findOne({
+                where: {
+                    blogName,
+                },
+                include: [Blog],
+            })
+            if (user) {
+                return res.json({ user });
+            } else {
+                return {error:"User not found"}
+            }
+        }))
 
 
 

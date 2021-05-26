@@ -4,8 +4,6 @@ import { Redirect, NavLink, useHistory, Link } from 'react-router-dom';
 import palette from '../../images/palette.jpg'
 import './UserBlog.css';
 import {parseDate} from '../../utils/helpers'
-import { reblogPost } from '../../store/post'
-import {findAUser} from '../../store/user'
 import { likeAPost, showLikes, unLikePost } from '../../store/likes'
 import { followBlog, showFollows, unFollowBlog } from '../../store/follows'
 
@@ -104,7 +102,7 @@ import { followBlog, showFollows, unFollowBlog } from '../../store/follows'
                         style={love ? { color: 'red' } : { color: 'none' }}/>
                      </>
                   )}
-               <span className='date'>{parseDate(post.createdAt)}</span>
+                  <span className='date'>{parseDate(post.createdAt)}</span>
                </div>
             </div>
          )

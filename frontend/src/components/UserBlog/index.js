@@ -22,7 +22,6 @@ const UserBlog = () => {
     let blogId;
 
     if(user) {
-        user = user['user']
         blogId = user.Blog.id;
     }
     let followed, liked = [];
