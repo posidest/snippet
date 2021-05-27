@@ -1,6 +1,6 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler');
-const { User, Follow, Post, Like, Blog, BlogPost } = require('../../db/models');
+const { User, Follow, Post, Like, Blog, Owner } = require('../../db/models');
 const { singlePublicFileUpload, singleMulterUpload } = require('../../awsS3');
 const router = express.Router()
 const { restoreUser } = require('../../utils/auth');
@@ -69,8 +69,6 @@ router.post(
 )
 
 
-
-
 //like a post
 router.post(
     `/likes`,
@@ -135,19 +133,37 @@ router.get(
                 order: [['createdAt', 'DESC']],
                 where: {
                     userId: follow.Blog.userId,
-                    // $or: [{
-                        //     ownerId: follow.Blog.userId,
-                        // }],
                     },
-                    include: [Like, User, Blog],
+                    include: [{
+                        model: User,
+                        as: 'Owner'
+                     },
+                    {model: Like},
+                    {model: User,
+                    include:[Blog]}]
                 });
             postData.push(...posts)
         }
-        // console.log(postData, 'post data from api route')
+
+        let userPosts = await Post.findAll({
+            order: [['createdAt', 'DESC']],
+            where: {
+                userId: user.id,
+                },
+                include: [{
+                    model: User,
+                    as: 'Owner'
+                },
+                {model: Like},
+                {model: User,
+                include: [Blog]}]
+            });
+            postData.push(...userPosts)
         return res.json({ postData })
-    })
+        })
     )
     
+
     //reblog a post 
     router.post(
         '/reblog',

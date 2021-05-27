@@ -11,6 +11,7 @@ const CreateUser = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [avatar, setAvatar] = useState(null);
     const [errors, setErrors] = useState([]);
+    const [image, setImage] = useState(null)
 
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
@@ -42,8 +43,10 @@ const CreateUser = () => {
     };
 
     const updateFile = (e) => {
-        const file = e.target.files[0];
-        if (file) setAvatar(file);
+        let file = e.target.files[0];
+        setAvatar(file);
+        file = URL.createObjectURL(file)
+        setImage(file);
     };
 
     return (
@@ -86,7 +89,10 @@ const CreateUser = () => {
                         <input type="file"
                             onChange={updateFile} />
                         Upload Avatar
-                </label>
+                    </label>
+                    {image && (
+                        <img src={image} />
+                    )}
                     <button type="submit">Sign Up</button>
                 </form>
             </div>

@@ -1,79 +1,75 @@
-
 .nav {
-    /* box-sizing: border-box; */
-    display: flex;
-    position: fixed;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 5px;
-    background: rgba(210, 210, 210, 0.3);
-    top: 8px;
+  /* box-sizing: border-box; */
+  display: flex;
+  position: fixed;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  background: rgba(210, 210, 210, 0.5);
+  top: 8px;
 }
 
 .nav i {
-    color: white;
-    top: 10px;
-    position: absolute;
-    cursor: pointer;
+  color: white;
+  top: 10px;
+  position: absolute;
+  cursor: pointer;
 }
 
-
 .fa-palette {
-    right: 10px;
-    /* color: deepskyblue; */
+  right: 10px;
+  /* color: deepskyblue; */
 }
 
 .fa-user {
-    right: 40px;
-    /* color: gray; */
+  right: 40px;
+  /* color: gray; */
 }
 
-
 .fa-cut {
-left: 10px;
-bottom: 20px;
+  left: 10px;
+  bottom: 20px;
 }
 
 .session {
-    align-self: flex-end;
+  align-self: flex-end;
 }
 
 .session a {
-    text-decoration: none;
-    color: black;
-    font-size: 12px;
-    font-weight: bold;
+  text-decoration: none;
+  color: black;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 .session div {
-    padding: 5px 10px 5px 10px;
-    position: absolute;
-    bottom: 6px;
-    border-radius: 5px;
+  padding: 5px 10px 5px 10px;
+  position: absolute;
+  bottom: 6px;
+  border-radius: 5px;
 }
 
 .login-btn {
-    background-color:#9a8c98;
-    right: 85px;
+  background-color: #9a8c98;
+  right: 85px;
 }
 
 .signup-btn {
-    background-color: #f2e9e4;
-    right: 15px;
+  background-color: #f2e9e4;
+  right: 15px;
 }
 
-
 @media screen and (max-width: 769px) {
-    .nav {
-        width: 100%;
-        height: 40px;
-    }
+  .nav {
+    width: 100%;
+    height: 40px;
+  }
 }
 
 @media screen and (min-width: 769px) {
-    .nav {
-        width: 99%;
-        height: 40px;
-        align-self: center;
-    }
+  .nav {
+    width: 99%;
+    height: 40px;
+    align-self: center;
+  }
 }

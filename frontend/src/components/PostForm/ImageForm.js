@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import React from 'react';
 import { postImage } from '../../store/post';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import './PostForm.css'
 
 const ImageForm = () => {
@@ -11,10 +11,13 @@ const ImageForm = () => {
     const [content, setContent] = useState('');
     const [caption, setCaption] = useState('');
     const [errors, setErrors] = useState([]);
-
+    const [image, setImage] = useState(null)
     const dispatch = useDispatch();
+    const history = useHistory()
     const user = useSelector((state) => state.session.user)
+
     if (!user) <Redirect to='/' />
+    const blogName = user.blogName
 
 
     const submitForm = (e) => {
@@ -26,12 +29,12 @@ const ImageForm = () => {
             content,
             caption,
             userId: user.id,
-        }))
-            .then(() => (
+        })).then(() => (
                 setUserId(''),
                 setType(''),
                 setContent(null),
-                setCaption('')
+                setCaption(''),
+                history.push(`/${blogName}`)
             ))
             .catch(async (res) => {
                 const data = await res.json();
@@ -43,8 +46,12 @@ const ImageForm = () => {
     }
 
     const updateFile = (e) => {
-        const file = e.target.files[0];
-        if (file) setContent(file);
+        let file = e.target.files[0];
+        if (file) {
+            setContent(file);
+            file = URL.createObjectURL(file)
+            setImage(file)
+        }
     };
 
 
@@ -58,10 +65,19 @@ const ImageForm = () => {
                     ))}
                 </div>
                 <label className='file-upload'>
-                    <input type='file' onChange={updateFile} placeholder='upload a pic' />
+                    <input type='file'
+                    onChange={updateFile} 
+                    placeholder='upload a pic' />
                     Upload an Image
                 </label>
-                <textarea onChange={(e) => setCaption(e.target.value)} value={caption} placeholder='Add a Caption' />
+                {image && (
+                <img src={image} />
+                )}
+                <textarea 
+                onChange={(e) => setCaption(e.target.value)} 
+                value={caption} 
+                placeholder='Add a Caption' 
+                />
                 <button type='submit'> Post</button>
             </form >
         </div >

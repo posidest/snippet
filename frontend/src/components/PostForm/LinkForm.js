@@ -14,6 +14,7 @@ const LinkForm = () => {
     const dispatch = useDispatch();
     const history = useHistory()
     const user = useSelector((state) => state.session.user)
+    const blogName = user.blogName;
     if (!user) history.push('/')
 
     const submitForm = (e) => {
@@ -30,7 +31,8 @@ const LinkForm = () => {
                 setUserId(''),
                 setType(''),
                 setContent(''),
-                setCaption('')
+                setCaption(''),
+                history.push(`/${blogName}`)
             )).catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) {

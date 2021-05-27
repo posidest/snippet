@@ -4,82 +4,86 @@ import { useDispatch, useSelector } from 'react-redux';
 import { populateBlog } from '../../store/post'
 import { findAUser } from '../../store/user'
 import PostButton from '../Menus/PostButton';
+import BlogPost from './BlogPost'
+import { likeAPost, showLikes, unLikePost } from '../../store/likes'
+import { followBlog, showFollows, unFollowBlog } from '../../store/follows'
 import palette from '../../images/palette.jpg';
 import './UserBlog.css'
 
-const UserBlog = ({isBlog, setIsBlog}) => {
+const UserBlog = () => {
+    const [following, setFollowing] = useState(false)
     const dispatch = useDispatch();
     const { blogName } = useParams();
-    console.log(blogName);
-    
-
-    const parseDate = (timestamp) => {
-        let mos = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        let res = timestamp.slice(0, timestamp.indexOf('T'));
-        res = res.split('-')
-        let arr = [res[1], res[2] += ', ', res[0]]
-        let month = mos[Number(arr[0]) - 1];
-        arr.shift()
-        arr.unshift(month)
-        res = arr.join(' ')
-        return res;
-    }
-
+    const userLikes = useSelector(state => state.likes.userLikes)
+    const userFollows = useSelector(state => state.follows.following)
     const sessionUser = useSelector((state) => state.session.user);
     let user = useSelector((state) => state.user.user);
-    if(user) user = user['user']
     let blogPosts = useSelector((state) => state.post.blogPosts);
+    let blogId;
 
-
+    if(user) {
+        blogId = user.Blog.id;
+    }
+    let followed, liked = [];
+        
+    if (userFollows) {
+         followed = userFollows.map(follow => follow.blogId);
+    }
+    if (userLikes) {
+        liked = userLikes.map(like => like.postId);
+    }
+    
     useEffect(() => {
-        dispatch(findAUser({ blogName: blogName }))           
+        dispatch(findAUser({ blogName: blogName }))
+        .then(() => dispatch(showFollows()))
+        .then(() => dispatch(showLikes()))         
     }, [dispatch])
-
+    
     useEffect(() => {
         if (user) {
             dispatch(populateBlog({userId: user.id}))
-            setIsBlog(true)
         }
     }, [dispatch, user])
+    
+        const follow = (e) => {
+             // !following ?
+             !followed.includes(blogId) ?
+             dispatch(followBlog({
+                userId: sessionUser.id,
+                blogId: blogId
+             })).then(() => {
+                 followed.push(blogId) 
+                 setFollowing(true)
+             }) :
+             dispatch(unFollowBlog({
+                userId: sessionUser.id,
+                blogId: blogId,
+             })).then(() => {
+                 followed = followed.filter((follow) => follow !== blogId)
+                 setFollowing(false)
+             })
+          }
+    
 
-
-    if (blogPosts) {
+    if (blogPosts && user && followed) {
         return (
             <div className='blog'>
                 <div className='owner-info'>
                     <img src={user.avatar || palette} alt='avatar'/>
                     <h3>{blogName}</h3>
+                    {!followed.includes(blogId) || !followed.length && (
+                        <button type='button' 
+                        onClick={follow}>
+                            Follow
+                        </button>)}
+                     {followed.includes(blogId) && (
+                        <button type='button' 
+                        onClick={follow}>
+                            Unfollow
+                        </button>)}
                 </div>
                 {blogPosts.map((post) => (
-                    <div className='post' key={post.id}>
-                        {post.type === 'image' && (
-                        <div className='image-post'>
-                            <img src={post.content} alt='image' style={{maxWidth: '400px', maxHeight: '400px'}}/>
-                        </div>
-                        )}
-                        {post.type === 'words' && (
-                        <div className='word-post'>
-                            <p style={{color: 'black'}}>{post.content}</p>
-                            </div>)}
-                        {post.type === 'link' && (
-                        <div className='link-post'>
-                            <a href={post.content}>{post.content}</a>
-                        </div>)}
-                        <div className='caption-div'>
-                            <p>
-                                {post.caption}
-                            </p>
-                        </div>
-                        <div className='underline'>            
-                        </div>
-                        <div className='post-foot'>
-                            <Link to={`/${post.id}/reblog`}>
-                                <i className='fas fa-sync-alt' />
-                            </Link>
-                            <i className='fas fa-heart' />
-                            <span className='date'>{parseDate(post.createdAt)}</span>
-                        </div>
-                    </div>
+                    <BlogPost post={post} followed={followed} liked={liked} user={user}/>
                 ))}
             </div>
         )

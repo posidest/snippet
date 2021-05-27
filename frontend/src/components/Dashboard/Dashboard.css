@@ -10,9 +10,21 @@
   /* background-color: #05122d; */
 }
 
+.discover {
+  position: absolute;
+  right: 30px;
+  top: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.discover-profile {
+}
+
 .dash-page {
   background-color: #05122d;
   margin: 0;
+  position: relative;
 }
 
 .avatar {
