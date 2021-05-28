@@ -25,9 +25,16 @@ import { followBlog, showFollows, unFollowBlog } from '../../store/follows'
                setFollowing(true)
             } else {
                setFollowing(false)
-            }
-         
+            }   
       },[followed])
+
+      useEffect(() => {
+         if (liked.includes(post.id)) {
+            setLove(true)
+         } else {
+            setLove(false)
+         }    
+      },[liked])
 
 
       const follow = (e) => {
@@ -111,21 +118,28 @@ import { followBlog, showFollows, unFollowBlog } from '../../store/follows'
                         </a>
                      </div>
                   )}
-                  <Link to={`/${post.Owner.blogName}`} style={{color: 'deepskyblue'}}>
-                     {post.Owner.blogName}:
-                  </Link>
-                  <span style={{paddingLeft: '5px'}}>{post.caption}</span>
+                  <div className='caption-div'>
+                     <Link to={`/${post.Owner.blogName}`} style={{color: 'deepskyblue'}}>
+                        {post.Owner.blogName}:
+                     </Link>
+                     <span style={{paddingLeft: '5px'}}>
+                        {post.caption}
+                     </span>
+                  </div>
                   <div className='underline'>
                   </div>
                   <div className='dash-btns'>
                      <i className="fas fa-heart fa-lg"
                         value={post.id}
                         onClick={like}
-                        style={love ? { color: 'red' } : { color: 'none' }}
+                        style={love ? {color: 'red'} : {color: 'none'}}
                      />
-                     < i className="fas fa-sync-alt fa-lg" onClick={reblog}/>
+                     <i className="fas fa-sync-alt fa-lg" onClick={reblog}/>
                   </div>
-                  <a href='/posts/id/likes' className='likes'>{post.Likes.length} likes</a>
+                  <a href='/posts/id/likes' 
+                  className='likes'>
+                     {post.Likes.length} likes
+                  </a>
                </div>
             </div>
          )

@@ -20,12 +20,10 @@ import { followBlog, showFollows, unFollowBlog } from '../../store/follows'
          setFollowing(true)
       } else {
          setFollowing(false)
-      }
-         
+      }       
       },[followed])
       
         const follow = (e) => {
-         // !following ?
          !followed.includes(blogId) ?
          dispatch(followBlog({
             userId: sessionUser.id,
@@ -83,10 +81,10 @@ import { followBlog, showFollows, unFollowBlog } from '../../store/follows'
                   <a href={post.content}>{post.content}</a>
                </div>)}
                <div className='caption-div'>
-                  <Link to={`/${post.Owner.blogName}`}>
+                  <Link to={`/${post.Owner.blogName}`} style={{color: 'deepskyblue'}}> 
                      {post.Owner.blogName}:
                   </Link>
-                  <p>
+                  <p style={{color: 'gray', fontStyle: 'italic', paddingLeft: '5px'}}>
                      {post.caption}
                   </p>
                </div>
@@ -99,7 +97,7 @@ import { followBlog, showFollows, unFollowBlog } from '../../store/follows'
                         <i className='fas fa-heart' 
                         value={post.id}
                         onClick={like}
-                        style={love ? { color: 'red' } : { color: 'none' }}/>
+                        style={love ? {color: 'red'} : {color: 'none'}}/>
                      </>
                   )}
                   <span className='date'>{parseDate(post.createdAt)}</span>
