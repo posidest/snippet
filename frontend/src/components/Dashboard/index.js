@@ -51,7 +51,8 @@ const Dashboard = () => {
                         <div className='discover-profile'>
                             <Link to={`/${user.blogName}`} style={{color: 'white'}}>
                                 <div className='discover-img'>
-                                    <img src={user.avatar || palette} style={{maxHeight: '70px', maxWidth: '70px'}}/>
+                                    <img src={user.avatar || palette} 
+                                    style={{maxHeight: '70px', maxWidth: '70px'}}/>
                                 </div>
                                 {user.blogName}
                             </Link>
@@ -65,17 +66,17 @@ const Dashboard = () => {
                         <div className='post-buttons'>
                             <NavLink to='/new/image'>
                                 <i className='fas fa-camera-retro fa-2x'
-                                    style={{ color: 'red' }} />
+                                    style={{color: 'red'}} />
                                 <p>Image</p>
                             </NavLink>
                             <NavLink to='/new/words'>
                                 <i className='fas fa-font fa-2x'
-                                    style={{ color: 'deepskyblue' }} />
+                                    style={{color: 'deepskyblue'}} />
                                 <p>Words</p>
                             </NavLink>
                             <NavLink to='/new/link'>
                                 <i className='fas fa-link fa-2x'
-                                    style={{ color: 'green' }} />
+                                    style={{color: 'green'}} />
                                 <p>Link</p>
                             </NavLink>
                         </div>
@@ -92,8 +93,7 @@ const Dashboard = () => {
                 </div >
             </div>
             )
-        }
-        else {
+        } else {
             return (
                 <div>
                     <h1 style={{ color: 'black' }}>

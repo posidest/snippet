@@ -56,14 +56,14 @@
   color: deepskyblue;
 }
 
-.caption-div p {
+/* .caption-div p {
   color: rgba(0, 0, 0, 0.8);
   margin-bottom: 40px;
 }
 
 .caption-div {
   width: 200px;
-}
+} */
 
 .post-foot {
   margin-bottom: 20px;
@@ -91,3 +91,11 @@
 .underline {
   border-bottom: 1px solid rgba(200, 200, 200, 0.6);
 }
+
+/* .caption-div {
+  margin: 20px; */
+/* text-align: center; */
+/* display: flex;
+  justify-content: center;
+  align-items: center;
+} */

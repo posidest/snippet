@@ -12,19 +12,32 @@
 
 .discover {
   position: absolute;
-  right: 30px;
-  top: 50px;
+  right: 100px;
+  top: 70px;
   display: flex;
   flex-direction: column;
 }
 
-.discover-profile {
+.discover h3 {
+  border-bottom: 2px solid gray;
+}
+
+.discover-profile a {
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.discover-img {
+  padding-right: 20px;
 }
 
 .dash-page {
   background-color: #05122d;
   margin: 0;
   position: relative;
+  height: 4000px;
 }
 
 .avatar {
@@ -137,4 +150,12 @@
   position: absolute;
   right: 620px;
   top: 70px;
+}
+
+.caption-div {
+  margin: 20px;
+  /* text-align: center; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
