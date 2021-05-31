@@ -37,7 +37,8 @@
   background-color: #05122d;
   margin: 0;
   position: relative;
-  height: 4000px;
+  min-height: 4000px;
+  padding-bottom: 60px;
 }
 
 .avatar {

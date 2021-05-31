@@ -25,7 +25,7 @@ const App = () => {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} isBlog={isBlog} setIsBlog={setIsBlog}/>
+      <Navigation isLoaded={isLoaded}/>
       {isLoaded && (
         <Switch>
           <Route exact path='/'>
