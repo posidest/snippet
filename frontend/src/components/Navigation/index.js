@@ -1,15 +1,23 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import * as sessionActions from '../../store/session';
+import { NavLink, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import {login} from '../../store/session';
 import ProfileButton from '../Menus/ProfileButton';
 import PostButton from '../Menus/PostButton';
 import './Navigation.css'
 
 const Navigation = ({ isLoaded, isBlog, setIsBlog }) => {
     const sessionUser = useSelector(state => state.session.user);
+    const dispatch = useDispatch()
+    const history = useHistory()
     let blogStyles = {
         border: '1px solid rgba(0, 0, 0, 0.3)'
+    }
+
+    const demoLogin = async (e) => {
+        e.preventDefault()
+        await dispatch(login({credential: 'Demo-lition', password: 'password'}))
+        await history.push('/dashboard')
     }
 
     let sessionLinks;
@@ -40,6 +48,9 @@ const Navigation = ({ isLoaded, isBlog, setIsBlog }) => {
                     <div className='signup-btn'>
                         <NavLink to='/signup'>Sign Up</NavLink>
                     </div>
+                    {/* <div className='demo-btn'>
+                        <button type='button' onClick={demoLogin}>Demo</button>
+                    </div> */}
                 </div>
             </>
         );

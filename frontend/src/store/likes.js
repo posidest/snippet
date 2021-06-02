@@ -15,7 +15,7 @@ const getLikes = (likes) => ({
     payload: likes
 })
 
-const removeLike = (like) => ({
+const unlike = (like) => ({
     type: UNLIKE,
     payload: like
 })
@@ -36,14 +36,13 @@ export const likeAPost = (like) => async (dispatch) => {
     }
 }
 
-export const unLikePost = (like) => async (dispatch) => {
-    const { postId, userId } = like;
+export const unLikePost = (postId) => async (dispatch) => {
     const res = await csrfFetch(`/api/posts/${postId}/likes`, {
         method: 'DELETE'
     });
     if (res.ok) {
         const data = await res.json();
-        dispatch(removeLike(data.like))
+        dispatch(unlike(data.like))
         return res;
     }
 }
@@ -70,7 +69,9 @@ export default function likeReducer(state = { likes: [] }, action) {
         case UNLIKE:
             const updatedUserLikes = state.userLikes.filter((like) => like !== action.payload)
             const updatedLikes = state.likes.filter((like) => like !== action.payload)
-            newState = { ...state, likes: updatedLikes, userLikes: updatedUserLikes }
+            newState = {...state}
+            newState['likes'] = updatedLikes;
+            newState['userLikes'] = updatedUserLikes;
             return newState;
         default: return state;
     }

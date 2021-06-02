@@ -25,8 +25,8 @@ const LoginFormPage = () => {
             });
     }
 
-    const handleDemoSubmit = () => {
-        return dispatch(sessionActions.login({ credentials: 'Demo-lition', password: 'password' }));
+    const handleDemoSubmit = (e) => {
+        return dispatch(sessionActions.login({ credential: 'Demo-lition', password: 'password' }));
     }
 
 

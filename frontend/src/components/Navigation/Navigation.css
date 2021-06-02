@@ -6,6 +6,7 @@
   align-items: center;
   border-radius: 5px;
   background: rgba(210, 210, 210, 0.5);
+  background-color: #05122d;
   top: 8px;
 }
 
@@ -35,7 +36,8 @@
   align-self: flex-end;
 }
 
-.session a {
+.session a,
+.session button {
   text-decoration: none;
   color: black;
   font-size: 12px;
@@ -57,6 +59,12 @@
 .signup-btn {
   background-color: #f2e9e4;
   right: 15px;
+}
+
+.demo-btn {
+  background-color: rgba(210, 210, 210, 0.5);
+  right: 150px;
+  /* top: 2px; */
 }
 
 @media screen and (max-width: 769px) {

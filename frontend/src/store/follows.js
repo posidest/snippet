@@ -16,7 +16,7 @@ const getFollows = (following) => ({
     payload: following
 })
 
-const removeFollow = (follow) => ({
+const unfollow = (follow) => ({
     type: UNFOLLOW,
     payload: follow
 })
@@ -54,14 +54,14 @@ export const showFollows = () => async (dispatch) => {
 }
 
 
-export const unFollowBlog = (follow) => async (dispatch) => {
-    const { blogId, userId } = follow;
+export const unFollowBlog = (blogId) => async (dispatch) => {
+    // const { blogId, userId } = follow;
     const res = await csrfFetch(`/api/blog/${blogId}/follows`, {
         method: 'DELETE'
     });
     if (res.ok) {
         const data = await res.json();
-        dispatch(removeFollow(data.follow));
+        dispatch(unfollow(data.follow));
         return res;
     }
 }
@@ -81,10 +81,11 @@ export default function followReducer(state = {}, action) {
             newState = {...state, ...action.payload}
             return newState;
         case UNFOLLOW:
-            const updatedUserFollows = state.userFollows.filter((follow) => follow !== action.payload)
+            // const updatedUserFollows = state.userFollows.filter((follow) => follow !== action.payload)
             // const updatedUserFollows = state.userFollows.slice(0, action.payload).concat(state.userFollows.slice(action.payload))
-            const updatedFollows = state.follows.filter((follow) => follow !== action.payload)
-            newState = { ...state, following: [...updatedFollows, ...updatedUserFollows]}
+            const updatedFollows = state.following.filter((follow) => follow !== action.payload)
+            newState = { ...state}
+            newState['following'] = updatedFollows;
             return newState;
         default: return state;
     }

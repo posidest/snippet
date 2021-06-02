@@ -7,13 +7,19 @@ import {parseDate} from '../../utils/helpers'
 import { likeAPost, showLikes, unLikePost } from '../../store/likes'
 import { followBlog, showFollows, unFollowBlog } from '../../store/follows'
 
-   const BlogPost = ({post, followed, liked, user}) => {
+   const BlogPost = ({post, followed, user}) => {
       const [following, setFollowing] = useState(false)
       const [love, setLove] = useState(false)
       const dispatch = useDispatch();
+      let liked;
+      const userLikes = useSelector(state => state.likes.userLikes)
+       if (userLikes) {
+        liked = userLikes.map(like => like.postId);
+    }
       const sessionUser = useSelector((state) => state.session.user)
       const blogId = user.Blog.id;
       const history = useHistory()
+      const postId = post.id;
 
       useEffect(() => {
       if (followed.includes(blogId)) {
@@ -22,6 +28,16 @@ import { followBlog, showFollows, unFollowBlog } from '../../store/follows'
          setFollowing(false)
       }       
       },[followed])
+
+      useEffect(() => {
+         if(liked) {
+            if (liked.includes(postId)) {
+               setLove(true)
+            } else {
+               setLove(false)
+            }    
+         }
+      },[liked, userLikes, dispatch])
       
         const follow = (e) => {
          !followed.includes(blogId) ?
@@ -42,19 +58,18 @@ import { followBlog, showFollows, unFollowBlog } from '../../store/follows'
       }
 
       const like = (e) => {
-         !liked.includes(post.id) ?
+         !liked.includes(postId) ?
             dispatch(likeAPost({
                userId: sessionUser.id,
-               postId: post.id
+               postId
             })).then(() => {
-                liked.push(post.id)
+                liked.push(postId)
+                dispatch(showLikes())
                 setLove(true)
             }) :
-            dispatch(unLikePost({
-               userId: sessionUser.id,
-               postId: post.id
-            })).then(() => {
-                liked = liked.filter((like) => like !== post.id)    
+            dispatch(unLikePost(postId)).then(() => {
+                liked = liked.filter((like) => like !== postId)
+                dispatch(showLikes())    
                 setLove(false)
             })
          }
@@ -63,7 +78,7 @@ import { followBlog, showFollows, unFollowBlog } from '../../store/follows'
       const reblog = (e) => {
          history.push(`/${post.id}/reblog`)
       }
-      
+      if(userLikes) {
          return (
             <div className='post' key={post.id}>
                {post.type === 'image' && (
@@ -104,6 +119,9 @@ import { followBlog, showFollows, unFollowBlog } from '../../store/follows'
                </div>
             </div>
          )
+      } else {
+         return <h1>...loading</h1>
+      }
       }
 
       export default BlogPost;
