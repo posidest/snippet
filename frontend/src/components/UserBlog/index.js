@@ -46,23 +46,24 @@ const UserBlog = () => {
     }, [dispatch, user])
     
         const follow = (e) => {
-             // !following ?
-             !followed.includes(blogId) ?
-             dispatch(followBlog({
-                userId: sessionUser.id,
-                blogId: blogId
-             })).then(() => {
-                 followed.push(blogId) 
-                 setFollowing(true)
-             }) :
-             dispatch(unFollowBlog({
-                userId: sessionUser.id,
-                blogId: blogId,
-             })).then(() => {
-                 followed = followed.filter((follow) => follow !== blogId)
-                 setFollowing(false)
-             })
-          }
+         // !following ?
+         !followed.includes(blogId) ?
+         dispatch(followBlog({
+            userId: sessionUser.id,
+            blogId: blogId
+         })).then(() => {
+             followed.push(blogId) 
+             dispatch(showFollows())
+             setFollowing(true)
+         }) :
+         dispatch(unFollowBlog(blogId))
+         .then(() => {
+             followed = followed.filter((follow) => follow !== blogId)
+             dispatch(showFollows())
+             setFollowing(false)
+         })
+      }
+
     
 
     if (blogPosts && user && followed) {
@@ -71,12 +72,12 @@ const UserBlog = () => {
                 <div className='owner-info'>
                     <img src={user.avatar || palette} alt='avatar'/>
                     <h3>{blogName}</h3>
-                    {!followed.includes(blogId) || !followed.length && (
+                    {!following && (
                         <button type='button' 
                         onClick={follow}>
                             Follow
                         </button>)}
-                     {followed.includes(blogId) && (
+                     {following && (
                         <button type='button' 
                         onClick={follow}>
                             Unfollow

@@ -94,10 +94,10 @@ const Dashboard = () => {
                 <div className='dev-info'>
                     <p>developed by Alana LaPoint</p>
                     <a href='https://github.com/posidest' target="_blank">
-                        <i class="fab fa-github-alt fa-2x" style={{color: 'white'}}></i>
+                        <i className="fab fa-github-alt fa-2x" style={{color: 'white'}}></i>
                     </a>
                     <a href='https://www.linkedin.com/in/alana-lapoint/' target="_blank">
-                        <i class="fab fa-linkedin fa-2x" style={{color: 'white'}}></i>
+                        <i className="fab fa-linkedin fa-2x" style={{color: 'white'}}></i>
                     </a>
                 </div>
             </div>

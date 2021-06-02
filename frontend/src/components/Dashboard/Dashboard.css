@@ -6,16 +6,18 @@
   position: relative;
   width: 700px;
   margin: 0 auto;
+  margin-top: 45px;
   /* margin-top: 50px; */
   /* background-color: #05122d; */
 }
 
 .discover {
   position: absolute;
-  right: 100px;
+  right: 30px;
   top: 70px;
   display: flex;
   flex-direction: column;
+  width: 200px;
 }
 
 .discover h3 {
@@ -35,7 +37,7 @@
 
 .dash-page {
   background-color: #05122d;
-  margin: 0;
+  /* margin: 0; */
   position: relative;
   min-height: 4000px;
   padding-bottom: 60px;
@@ -159,4 +161,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.dev-info i {
+  padding: 10px;
 }

@@ -17,6 +17,7 @@ const LandingPage = ({ isLoaded }) => {
     const history = useHistory();
     if (sessionUser) history.push('/dashboard')
 
+
     return (
         <div className='landing'>
             <div className='first-view'>
