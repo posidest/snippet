@@ -22,5 +22,6 @@
   "bugs": {
     "url": "https://github.com/posidest/-authenticate-me/issues"
   },
-  "homepage": "https://github.com/posidest/-authenticate-me#readme"
+  "homepage": "https://github.com/posidest/-authenticate-me#readme",
+  "dependencies": {}
 }
