@@ -89,18 +89,21 @@ router.post(
         restoreUser,
         asyncHandler(async (req, res) => {
             const user = req.user;
-            const { blogId, userId } = req.body;
+            console.log('im inside the delete follow api')
+            // const { blogId, userId } = req.body;
+            // console.log(blogId, 'blog id from unfollow api')
             const id = req.params.blogId;
-            if (user.id === userId && blogId === id) {
-                const follow = await Follow.findOne({
+            // if (user.id === userId && blogId === id) {
+                const unfollow = await Follow.findOne({
                     where: {
-                        userId,
-                        blogId
+                        userId: user.id,
+                        blogId: id
                     }
                 })
-                await follow.destroy()
-                return res.json()
-            }
+                let follow = unfollow; 
+                await unfollow.destroy()
+                console.log(follow, 'follow from unfollow')
+                return res.json({ follow })
         })
     )
 

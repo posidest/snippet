@@ -202,18 +202,17 @@ router.get(
         restoreUser,
         asyncHandler(async (req, res) => {
             const user = req.user;
-            const { postId, userId } = req.body;
             const id = req.params.postId;
-            if (user.id === userId && postId === id) {
-                const like = await Like.findAll({
-                    where: {
-                        userId,
-                        postId
+            // if (user.id === userId && postId === id) {
+            const unlike = await Like.findOne({
+                where: {
+                    userId: user.id,
+                    postId: id
                     }
                 })
-                await like.destroy();
-                return res.json()
-            }
+            let like = unlike;
+            await unlike.destroy();
+            return res.json({like})
         })
         )
         

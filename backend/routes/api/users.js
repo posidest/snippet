@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation')
 const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
-const { User, Blog } = require('../../db/models');
+const { User, Blog, Follow } = require('../../db/models');
 const { createBlog } = require('../../utils/blog')
 const { singleMulterUpload, singlePublicFileUpload } = require('../../awsS3')
 const router = express.Router();
@@ -66,14 +66,30 @@ router.get(
     restoreUser,
     asyncHandler(async (req, res) => {
         const user = req.user;
-        const users = await User.findAll(
-            {
+        // let following = await Follow.findAll({
+        //     where: {
+        //         userId: user.id,
+        //     },
+        //     include: [Blog],
+        // });
+        // following = JSON.stringify(following)
+        // console.log(following, 'folowing from get users api')
+        // let follows = following.map((follow => {
+        //     follow = follow.Blog.userId
+        // }))
+        // console.log(follows, 'follows map from users api')
+        const users = await User.findAll({
             where: {
-                id: {
-                    [Op.ne]: user.id
-                },
+                // [Op.and]: [
+                    id: {
+                        [Op.ne]: user.id
+                    },
+                    // {id: {
+                    //     [Op.notIn]: follows
+                    // }}
             },
-            limit: 5,
+            // limit: 5,
+            offset: 4,
             include: [Blog],
         }
         )
