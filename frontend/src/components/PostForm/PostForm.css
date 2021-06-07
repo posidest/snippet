@@ -75,3 +75,9 @@ textarea {
 .caption-div {
   text-align: center;
 }
+
+.reblog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -36,7 +36,7 @@ const ReblogForm = () => {
 
    if (post) {
       return (
-         <div className='post' style={{marginTop: '100px'}}>
+         <div className='reblog' style={{marginTop: '100px'}}>
             <h4>Reblog this post?</h4>
             <div key={post.id}>
                {post.type === 'image' && (
@@ -55,13 +55,9 @@ const ReblogForm = () => {
                   <div className='link-post'>
                      <a href={post.content}>{post.content}</a>
                </div>)}
-               {/* <div className='caption-div'> */}
                <p style={{color: 'black', marginBottom: '40px'}}>
                {post.caption}
                </p>
-               {/* </div> */}
-               <div className='underline'>            
-               </div>
             </div>
             <form onSubmit={repost}>
             <button type='submit'>Yes</button>

@@ -38,7 +38,7 @@ const App = () => {
             <CreateUser />
           </Route>
           <Route exact path='/dashboard'>
-            <Dashboard />
+            <Dashboard isLoaded={isLoaded}/>
           </Route>
           <Route exact path='/new/image'>
             <ImageForm />
