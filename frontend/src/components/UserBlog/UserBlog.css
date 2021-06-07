@@ -25,9 +25,14 @@
   font-weight: lighter;
 }
 
-.owner-info img {
+.avatar-container {
   height: 100px;
   width: 100px;
+}
+
+.owner-info img {
+  max-height: 100px;
+  max-width: 100px;
 }
 
 .owner-info {

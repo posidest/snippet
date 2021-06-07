@@ -49,9 +49,18 @@ const UserBlog = () => {
             dispatch(populateBlog({userId: user.id}))
         }
     }, [dispatch, user])
+
+    useEffect(() => {
+        if(followed) {
+            if (followed.includes(blogId)) {
+                setFollowing(true)
+            } else {
+                setFollowing(false)
+            }
+        }
+    }, [followed, userFollows])
     
         const follow = (e) => {
-         // !following ?
          !followed.includes(blogId) ?
          dispatch(followBlog({
             userId: sessionUser.id,
@@ -60,12 +69,14 @@ const UserBlog = () => {
              followed.push(blogId) 
              dispatch(showFollows())
              setFollowing(true)
+             return following
          }) :
          dispatch(unFollowBlog(blogId))
          .then(() => {
              followed = followed.filter((follow) => follow !== blogId)
              dispatch(showFollows())
              setFollowing(false)
+             return following
          })
       }
 
@@ -75,7 +86,9 @@ const UserBlog = () => {
         return (
             <div className='blog'>
                 <div className='owner-info'>
-                    <img src={user.avatar || palette} alt='avatar'/>
+                    <div className='avatar-container'>
+                        <img src={user.avatar || palette} alt='avatar'/>
+                    </div>
                     <h3>{blogName}</h3>
                     {!following && (
                         <button type='button' 
