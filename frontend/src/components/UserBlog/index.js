@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { populateBlog } from '../../store/post'
 import { findAUser } from '../../store/user'
@@ -12,6 +12,7 @@ import './UserBlog.css'
 
 const UserBlog = () => {
     const [following, setFollowing] = useState(false)
+    const history = useHistory()
     const dispatch = useDispatch();
     const { blogName } = useParams();
     const userLikes = useSelector(state => state.likes.userLikes)
@@ -20,6 +21,10 @@ const UserBlog = () => {
     let user = useSelector((state) => state.user.user);
     let blogPosts = useSelector((state) => state.post.blogPosts);
     let blogId;
+
+    if(!sessionUser) {
+        history.push('/')
+    }
 
     if(user) {
         blogId = user.Blog.id;
