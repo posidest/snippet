@@ -13,11 +13,11 @@
 
 .discover {
   position: absolute;
-  right: 30px;
-  top: 70px;
+  right: 10%;
+  top: 1%;
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: 15%;
 }
 
 .discover h3 {
@@ -165,4 +165,16 @@
 
 .dev-info i {
   padding: 10px;
+}
+
+.dev-info a i:hover {
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+@media screen and (max-width: 769px) {
+  .discover {
+    display: hidden;
+  }
 }

@@ -33,7 +33,7 @@
   /* background: center url('../../images/41.jpg'); */
   /* background-size: contain; */
   background-repeat: none;
-  height: 720px;
+  height: 900px;
 }
 
 .first-view > .text > h1 {
@@ -48,14 +48,14 @@
   /* background-color: springgreen; */
   margin-top: 10px;
   position: relative;
-  height: 800px;
+  height: 900px;
 }
 
 .third-view {
   background-color: #384e77;
   /* background-color: deepskyblue; */
   margin-top: 10px;
-  height: 800px;
+  height: 900px;
 }
 
 .second-view > .text,

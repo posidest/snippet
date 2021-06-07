@@ -9,9 +9,9 @@ import { showFollows } from '../../store/follows'
 import { discoverUsers } from '../../store/user'
 import Post from './Post'
 
-const Dashboard = () => {
+const Dashboard = ({isLoaded}) => {
 
-    const [loaded,setLoaded] = useState(false);
+    // const [loaded,setLoaded] = useState(false);
     const dispatch = useDispatch();
     let followed, liked = [];
     const sessionUser = useSelector(state => state.session.user);
@@ -35,14 +35,14 @@ const Dashboard = () => {
             .then(() => dispatch(showFollows()))
             .then(() => dispatch(showLikes()))
             .then(() => dispatch(discoverUsers()))
-            .then(() => setLoaded(true))
+            // .then(() => setLoaded(true))
         }, [dispatch])
 
     if (!sessionUser) {
         return <Redirect to='/' />
     }
 
-     if (posts && userFollows && userLikes && users) { 
+     if (posts && userFollows && userLikes && users && isLoaded) { 
         return (
             <div className='dash-page'>
                 <div className='discover'>
