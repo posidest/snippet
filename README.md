@@ -1,5 +1,6 @@
 # snippet
 ![splash](https://github.com/posidest/snippet/blob/main/frontend/public/snippet-splash-update.png)
+![blog](https://github.com/posidest/snippet/blob/main/frontend/public/snippet-user-blog.png)
 
 ## Table of contents
 * [About](#about)
