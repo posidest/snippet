@@ -52,7 +52,7 @@ const Dashboard = ({isLoaded}) => {
                             <Link to={`/${user.blogName}`} style={{color: 'white'}}>
                                 <div className='discover-img'>
                                     <img src={user.avatar || palette} 
-                                    style={{maxHeight: '70px', maxWidth: '70px'}}/>
+                                    style={{height: '60px', width: '60px'}}/>
                                 </div>
                                 {user.blogName}
                             </Link>
