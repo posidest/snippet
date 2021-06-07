@@ -1,51 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Bitter:wght@900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 .login-div {
-    background: center url('../../images/bg.jpg');
-    background-size: contain;
-     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;  
-    height: 800px;
-    width: 100%;
-    color: white;
-    align-items: center;
-    justify-content: center;
-    border-radius: 3px;
+  background: center url("../../images/bg.jpg");
+  background-size: cover;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 900px;
+  width: 100%;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+}
+
+.login-page {
+  background-color: #05122d;
+  height: 2000px;
 }
 
 form {
-    margin-bottom: 200px;
-    width: 250px;
-    padding: 6px;
+  margin-bottom: 200px;
+  width: 250px;
+  padding: 6px;
 }
 
 input {
-    border-radius: 3px;
-    padding: 6px;
-    background-color: white;
-    border: none;
-    margin: 6px;
-    border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 6px;
+  background-color: white;
+  border: none;
+  margin: 6px;
+  border: 1px solid #ccc;
 }
 
 button {
-    border-radius: 3px;
-    padding: 6px;
-    background-color: #8bbeb2; 
-    /* border: 1px solid #ccc; */
-    margin: 6px;
-    font-weight: bold;
+  border-radius: 3px;
+  padding: 6px;
+  background-color: #8bbeb2;
+  /* border: 1px solid #ccc; */
+  margin: 6px;
+  font-weight: bold;
 }
 
 .demo {
-    background-color: #9a8c98;
+  background-color: #9a8c98;
 }
 
-
 .logo {
-    font-size: 4.5em;
-    font-family: 'Bitter', serif;
+  font-size: 4.5em;
+  font-family: "Bitter", serif;
 }

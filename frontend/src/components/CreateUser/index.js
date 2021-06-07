@@ -50,51 +50,53 @@ const CreateUser = () => {
     };
 
     return (
-        <div className='create-user'>
-            <div className='errors'>
-                {errors.length > 0 &&
-                    errors.map((error) => <div key={error}>{error}</div>)}
-            </div>
-            <h1 className='logo'>snippet</h1>
-            <div className='form-div'>
-                <form
-                    style={{ display: "flex", flexFlow: "column" }}
-                    onSubmit={handleSubmit}
-                >
-                    <input
-                        type="text"
-                        placeholder="Blog name"
-                        value={blogName}
-                        onChange={(e) => setBlogName(e.target.value)}
-                    />
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <input
-                        type="password"
-                        placeholder="Confirm Password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                    />
-                    <label class='file-upload'>
-                        <input type="file"
-                            onChange={updateFile} />
-                        Upload Avatar
-                    </label>
-                    {image && (
-                        <img src={image} />
-                    )}
-                    <button type="submit">Sign Up</button>
-                </form>
+        <div className='signup-page'>
+            <div className='create-user'>
+                <div className='errors'>
+                    {errors.length > 0 &&
+                        errors.map((error) => <div key={error}>{error}</div>)}
+                </div>
+                <h1 className='logo'>snippet</h1>
+                <div className='form-div'>
+                    <form
+                        style={{ display: "flex", flexFlow: "column" }}
+                        onSubmit={handleSubmit}
+                    >
+                        <input
+                            type="text"
+                            placeholder="Blog name"
+                            value={blogName}
+                            onChange={(e) => setBlogName(e.target.value)}
+                        />
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <input
+                            type="password"
+                            placeholder="Confirm Password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                        />
+                        <label class='file-upload'>
+                            <input type="file"
+                                onChange={updateFile} />
+                            Upload Avatar
+                        </label>
+                        {image && (
+                            <img src={image} />
+                        )}
+                        <button type="submit">Sign Up</button>
+                    </form>
+                </div>
             </div>
         </div>
     )
