@@ -66,34 +66,16 @@ router.get(
     restoreUser,
     asyncHandler(async (req, res) => {
         const user = req.user;
-        // let following = await Follow.findAll({
-        //     where: {
-        //         userId: user.id,
-        //     },
-        //     include: [Blog],
-        // });
-        // following = JSON.stringify(following)
-        // console.log(following, 'folowing from get users api')
-        // let follows = following.map((follow => {
-        //     follow = follow.Blog.userId
-        // }))
-        // console.log(follows, 'follows map from users api')
         const users = await User.findAll({
             where: {
-                // [Op.and]: [
-                    id: {
-                        [Op.ne]: user.id
-                    },
-                    // {id: {
-                    //     [Op.notIn]: follows
-                    // }}
+                id: {
+                    [Op.ne]: user.id
+                },
             },
             limit: 15,
-            // offset: 4,
             include: [Blog],
         }
         )
-        console.log(users, 'users from api')
         return res.json({ users })
     })
     )
