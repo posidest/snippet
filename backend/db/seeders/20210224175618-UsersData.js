@@ -13,21 +13,21 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('password'),
         avatar: 'https://snippetbucket.s3.amazonaws.com/b18.jpg',
       },
-      {
-        email: faker.internet.email(),
-        blogName: faker.internet.userName(),
-        hashedPassword: bcrypt.hashSync(faker.internet.password())
-      },
-      {
-        email: faker.internet.email(),
-        blogName: faker.internet.userName(),
-        hashedPassword: bcrypt.hashSync(faker.internet.password())
-      },
-      {
-        email: faker.internet.email(),
-        blogName: faker.internet.userName(),
-        hashedPassword: bcrypt.hashSync(faker.internet.password())
-      },
+      // {
+      //   email: faker.internet.email(),
+      //   blogName: faker.internet.userName(),
+      //   hashedPassword: bcrypt.hashSync(faker.internet.password())
+      // },
+      // {
+      //   email: faker.internet.email(),
+      //   blogName: faker.internet.userName(),
+      //   hashedPassword: bcrypt.hashSync(faker.internet.password())
+      // },
+      // {
+      //   email: faker.internet.email(),
+      //   blogName: faker.internet.userName(),
+      //   hashedPassword: bcrypt.hashSync(faker.internet.password())
+      // },
     ], {});
   },
 
