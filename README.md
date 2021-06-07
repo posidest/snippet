@@ -1,4 +1,5 @@
 # snippet
+![splash](https://github.com/posidest/snippet/blob/main/public/snippet-splash-update.png?raw=true)
 
 ## Table of contents
 * [About](#about)
