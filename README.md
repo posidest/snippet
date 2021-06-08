@@ -11,7 +11,9 @@
 
 
 ## About
-snippet is a tumblr clone for artists and designers to collect visual inspiration.
+snippet is a tumblr clone for artists and designers to collect visual inspiration.  
+
+[Live Link](https://snippet-asl.herokuapp.com/)
 
 ## Motivation
 I've always found tumblr to be a great site for collecting and curating imagery. I like the overall layout, design, and user interface, and wanted to try to build something similar. 
