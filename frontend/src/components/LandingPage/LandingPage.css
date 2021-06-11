@@ -2,10 +2,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 .landing {
-  /* background-color: rgba(150, 150, 150, 0.3); */
-}
-
-.landing {
   display: flex;
   background-color: #05122d;
   flex-direction: column;
@@ -22,7 +18,6 @@
   flex-direction: column;
   width: 100%;
   color: white;
-  /* justify-content: center; */
   align-items: center;
   border-radius: 5px;
 }
@@ -30,8 +25,6 @@
 .first-view {
   background: center url("../../images/bg.jpg");
   background-size: cover;
-  /* background: center url('../../images/41.jpg'); */
-  /* background-size: contain; */
   background-repeat: none;
   height: 900px;
 }
@@ -45,7 +38,6 @@
 
 .second-view {
   background-color: #8bbeb2;
-  /* background-color: springgreen; */
   margin-top: 10px;
   position: relative;
   height: 900px;
@@ -53,7 +45,6 @@
 
 .third-view {
   background-color: #384e77;
-  /* background-color: deepskyblue; */
   margin-top: 10px;
   height: 900px;
 }
@@ -73,11 +64,6 @@
 .second-view > .text h1,
 .third-view > .text h1 {
   padding-bottom: 10px;
-}
-
-p {
-  background-color: transparent;
-  color: white;
 }
 
 .wotsit {
@@ -110,13 +96,6 @@ p {
   margin: 6px;
 }
 
-a {
-  text-decoration: none;
-  color: black;
-  font-size: 12px;
-  font-weight: bold;
-}
-
 .landing-pics {
   display: flex;
   flex-direction: row;
@@ -128,15 +107,6 @@ a {
   padding: 20px;
   margin-top: 20px;
 }
-
-/* .pic {
-    width: 150px;
-    height: 200px;
-    border-radius: 3px;
-    background-color: white;
-    padding: 20px 0 20px 0;
-    margin: 10px;
-} */
 
 @media screen and (max-width: 769px) {
   .landing div {

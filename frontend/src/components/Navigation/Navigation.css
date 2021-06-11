@@ -1,13 +1,10 @@
 .nav {
-  /* box-sizing: border-box; */
   display: flex;
-  position: fixed;
+  position: relative;
   justify-content: space-between;
   align-items: center;
-  border-radius: 5px;
   background: rgba(210, 210, 210, 0.5);
   background-color: #05122d;
-  top: 8px;
   height: 45px;
   margin: 0 auto;
   width: 100%;
@@ -22,12 +19,12 @@
 
 .fa-palette {
   right: 10px;
-  /* color: deepskyblue; */
+  bottom: 20px;
 }
 
 .fa-user {
   right: 40px;
-  /* color: gray; */
+  bottom: 20px;
 }
 
 .fa-cut {
@@ -67,7 +64,6 @@
 .demo-btn {
   background-color: rgba(210, 210, 210, 0.5);
   right: 150px;
-  /* top: 2px; */
 }
 
 @media screen and (max-width: 769px) {

@@ -19,19 +19,24 @@ h4 {
   text-align: center;
 }
 
+p {
+  background-color: transparent;
+  color: white;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  font-size: 12px;
+  font-weight: bold;
+}
+
 span {
   font-family: "Roboto", sans-serif;
   font-style: italic;
   text-align: center;
   color: rgba(0, 0, 0, 0.5);
   font-size: 12px;
-}
-
-input {
-  font-size: 12px;
-  color: black;
-  font-family: "Roboto", sans-serif;
-  text-align: center;
 }
 
 button {
@@ -53,4 +58,60 @@ button {
   font-size: 14px;
   font-weight: bold;
   font-family: "Roboto", sans-serif;
+}
+
+ul {
+  list-style-type: none;
+  text-align: center;
+  padding-right: 45px;
+}
+
+li {
+  font-size: 12px;
+  padding: 4px;
+  cursor: pointer;
+  color: black;
+}
+
+li a:hover {
+  color: deepskyblue;
+}
+
+li a {
+  font-weight: lighter;
+  font-style: normal;
+}
+
+form {
+  margin-bottom: 200px;
+  width: 250px;
+  padding: 6px;
+}
+
+input,
+textarea {
+  border-radius: 3px;
+  padding: 9px;
+  background-color: white;
+  border: none;
+  margin: 6px;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  color: black;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+}
+
+button {
+  border-radius: 3px;
+  padding: 10px;
+  background-color: #8bbeb2;
+  /* border: 1px solid #ccc; */
+  margin: 6px;
+  font-weight: bold;
+  border: none;
+}
+
+input[type="file"] {
+  display: none;
 }
