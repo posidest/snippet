@@ -1,52 +1,37 @@
-.drop-down-profile, .drop-down-post {
-    margin-top: 100px;
-    background-color: white;
-    display: flex;
-    border-radius: 3px;
-    height: min-content;
-    justify-content: center;
+.drop-down-profile,
+.drop-down-post {
+  margin-top: 100px;
+  background-color: white;
+  display: flex;
+  border-radius: 3px;
+  height: min-content;
+  justify-content: center;
+  z-index: 1;
 }
 
 .drop-down-profile {
-    margin-right: 40px;
-    margin-top: 190px;
-    width: 100px;
+  margin-right: 40px;
+  margin-top: 190px;
+  width: 100px;
 }
 
 .drop-down-post {
-    margin-right: 10px;
-    margin-top: 140px;
-    width: 80px;
-}
-
-ul {
-    list-style-type: none;
-    text-align: center;
-    padding-right: 45px;
-}
-
-li {
-    font-size: 12px;
-    padding: 4px;
-    cursor: pointer;
-    color: black;
-}
-
-li a:hover {
-    color: deepskyblue;
-}
-
-li a {
-        font-weight: lighter;
-        font-style: normal;
+  margin-right: 10px;
+  margin-top: 140px;
+  width: 80px;
 }
 
 .logout {
-    padding-top: 10px;
-    font-weight: bolder;
-    font-style: normal;
+  padding-top: 10px;
+  font-weight: bolder;
+  font-style: normal;
 }
 
 .logout:hover {
-    color: red;
+  color: red;
+}
+
+.post-btn {
+  height: 40px;
+  position: absolute;
 }

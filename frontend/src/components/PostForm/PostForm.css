@@ -2,8 +2,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 .form-div {
-  /* background: center url('../../images/bg.jpg');
-    background-size: contain; */
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -13,36 +11,6 @@
   align-items: center;
   justify-content: center;
   border-radius: 3px;
-}
-
-form {
-  margin-bottom: 200px;
-  width: 250px;
-  padding: 6px;
-}
-
-input,
-textarea {
-  border-radius: 3px;
-  padding: 9px;
-  background-color: white;
-  border: none;
-  margin: 6px;
-  border: 1px solid #ccc;
-}
-
-button {
-  border-radius: 3px;
-  padding: 10px;
-  background-color: #8bbeb2;
-  /* border: 1px solid #ccc; */
-  margin: 6px;
-  font-weight: bold;
-  border: none;
-}
-
-input[type="file"] {
-  display: none;
 }
 
 .file-upload {
@@ -60,11 +28,6 @@ input[type="file"] {
 .logo {
   font-size: 4.5em;
   font-family: "Bitter", serif;
-}
-
-textarea {
-  font-family: "Roboto", sans-serif;
-  font-size: 12px;
 }
 
 .words {

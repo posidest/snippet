@@ -20,30 +20,6 @@
   height: 2000px;
 }
 
-form {
-  margin-bottom: 200px;
-  width: 250px;
-  padding: 6px;
-}
-
-input {
-  border-radius: 3px;
-  padding: 6px;
-  background-color: white;
-  border: none;
-  margin: 6px;
-  border: 1px solid #ccc;
-}
-
-button {
-  border-radius: 3px;
-  padding: 6px;
-  background-color: #8bbeb2;
-  /* border: 1px solid #ccc; */
-  margin: 6px;
-  font-weight: bold;
-}
-
 .demo {
   background-color: #9a8c98;
 }

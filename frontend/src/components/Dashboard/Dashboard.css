@@ -38,9 +38,11 @@
 .dash-page {
   background-color: #05122d;
   /* margin: 0; */
-  position: relative;
+  /* position: relative; */
   min-height: 4000px;
+  /* margin-top: 200px; */
   padding-bottom: 60px;
+  z-index: 0;
 }
 
 .avatar {

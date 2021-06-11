@@ -1,7 +1,6 @@
 .nav {
-  /* box-sizing: border-box; */
   display: flex;
-  position: fixed;
+  position: relative;
   justify-content: space-between;
   align-items: center;
   border-radius: 5px;
@@ -22,12 +21,10 @@
 
 .fa-palette {
   right: 10px;
-  /* color: deepskyblue; */
 }
 
 .fa-user {
   right: 40px;
-  /* color: gray; */
 }
 
 .fa-cut {
@@ -67,7 +64,6 @@
 .demo-btn {
   background-color: rgba(210, 210, 210, 0.5);
   right: 150px;
-  /* top: 2px; */
 }
 
 @media screen and (max-width: 769px) {
