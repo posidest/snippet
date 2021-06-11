@@ -72,7 +72,8 @@ router.get(
                     [Op.ne]: user.id
                 },
             },
-            limit: 15,
+            limit: 5,
+            order: [['createdAt', 'DESC']],
             include: [Blog],
         }
         )
